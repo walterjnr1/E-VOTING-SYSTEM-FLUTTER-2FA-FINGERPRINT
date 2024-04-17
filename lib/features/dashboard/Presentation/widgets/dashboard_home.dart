@@ -1,0 +1,41 @@
+import 'package:e_voting_2fa_biometric/core/colour/color.dart';
+import 'package:e_voting_2fa_biometric/features/auth/Presentation/screens/login.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+class dashboardScreenWidget extends StatefulWidget {
+  @override
+  State<dashboardScreenWidget> createState() => _dashboardScreenWidgetState();
+}
+
+class _dashboardScreenWidgetState extends State<dashboardScreenWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold();
+  }
+  bool visible = true;
+ }
+
+Widget AddVehicle(BuildContext context) {
+  return Container(
+      height: 90,
+      child: Card(
+        color: bgColor,
+        margin: const EdgeInsets.all(3),
+        child: ListTile(
+          subtitle: Text("Add a vehicle",
+              style: GoogleFonts.lato(
+                textStyle: TextStyle(color: primaryColor, letterSpacing: .5),
+                fontSize: 15,
+                fontWeight: FontWeight.w700,
+                fontStyle: FontStyle.italic,
+              )),
+          trailing: Icon(Icons.arrow_circle_right),
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => voterlogin()));
+          },
+        ),
+      ));
+}
+
