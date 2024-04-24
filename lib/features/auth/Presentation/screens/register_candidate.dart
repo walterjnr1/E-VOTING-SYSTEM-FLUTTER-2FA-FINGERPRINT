@@ -56,21 +56,24 @@ class _candidateregisterState extends State<candidateregister> {
             SizedBox(height: 3.0),
             header_img(context, postUserModel),
             SizedBox(height: 12.0),
-            fullname_textfield(context, postUserModel),
+            fullname(context, postUserModel),
             SizedBox(height: 12.0),
-            voterid_textfield(context, postUserModel),
+            voterID(context, postUserModel),
             SizedBox(height: 12.0),
-            phone_textfield(context, postUserModel),
+            phone(context, postUserModel),
             SizedBox(height: 12.0),
-            email_textfield(context, postUserModel),
+            email(context, postUserModel),
             SizedBox(height: 12.0),
-            state_textfield(context, postUserModel),
+            state(context, postUserModel),
+            SizedBox(height: 12.0),
+            occupation(context, postUserModel),
             SizedBox(height: 12.0),
             partydropdownwidget(),
             SizedBox(height: 12.0),
             officedropdownwidget(),
             SizedBox(height: 12.0),
             registerbutton(context),
+            SizedBox(height: 12.0),
           ],
         ),
       ),
@@ -175,4 +178,8 @@ class _candidateregisterState extends State<candidateregister> {
                       )),
         ));
   }
+
+
+
+  
 }

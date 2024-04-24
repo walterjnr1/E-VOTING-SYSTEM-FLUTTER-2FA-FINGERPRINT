@@ -1,5 +1,6 @@
 import 'package:e_voting_2fa_biometric/core/App_constant/constant.dart';
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
+import 'package:e_voting_2fa_biometric/features/auth/Domain/controller_candidate_Register.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/provider/data_class_voter.dart';
 import 'package:flutter/material.dart';
 
@@ -36,52 +37,164 @@ Widget header_img(BuildContext context, DataClassVoter postUserModel) {
   );
 }
 
-Widget fullname_textfield(BuildContext context, DataClassVoter postUserModel) {
-  return Text('Fullname: ${postUserModel.post?.fullname ?? ""}',
-      textAlign: TextAlign.left,
-      style: TextStyle(
-          fontFamily: 'Roboto',
-          color: fontcolour2,
-          fontSize: 19,
-          fontWeight: FontWeight.w600));
+Widget fullname(BuildContext context, DataClassVoter postUserModel) {
+  txtfullname_F.text = '${postUserModel.post?.fullname ?? ""}';
+  return TextFormField(
+    enabled: false,
+    style: TextStyle(
+      color: Colors.black, // Add this line to set the font color
+    ),
+    controller: txtfullname_F,
+    decoration: InputDecoration(
+      labelText: 'Fullname',
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: black, width: 2.0),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: black, width: 2.0),
+      ),
+      labelStyle: TextStyle(fontWeight: FontWeight.bold),
+    ),
+    validator: (value) {
+      if (value == null || value.isEmpty) {
+        return 'Please enter your Voter ID';
+      }
+      return null;
+    },
+  );
 }
 
-Widget state_textfield(BuildContext context, DataClassVoter postUserModel) {
-  return Text('State: ${postUserModel.post?.state ?? ""}',
-      textAlign: TextAlign.left,
-      style: TextStyle(
-          fontFamily: 'Roboto',
-          color: fontcolour2,
-          fontSize: 19,
-          fontWeight: FontWeight.w600));
+Widget state(BuildContext context, DataClassVoter postUserModel) {
+  txtstate_F.text = '${postUserModel.post?.state ?? ""}';
+  return TextFormField(
+    enabled: false,
+    style: TextStyle(
+      color: Colors.black, // Add this line to set the font color
+    ),
+    controller: txtstate_F,
+    decoration: InputDecoration(
+      labelText: 'State',
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: black, width: 2.0),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: black, width: 2.0),
+      ),
+      labelStyle: TextStyle(fontWeight: FontWeight.bold),
+    ),
+    validator: (value) {
+      if (value == null || value.isEmpty) {
+        return 'Please enter your Voter ID';
+      }
+      return null;
+    },
+  );
 }
 
-Widget email_textfield(BuildContext context, DataClassVoter postUserModel) {
-  return Text('Email: ${postUserModel.post?.email ?? ""}',
-      textAlign: TextAlign.left,
-      style: TextStyle(
-          fontFamily: 'Roboto',
-          color: fontcolour2,
-          fontSize: 19,
-          fontWeight: FontWeight.w600));
+Widget email(BuildContext context, DataClassVoter postUserModel) {
+  txtemail_F.text = '${postUserModel.post?.email ?? ""}';
+  return TextFormField(
+    enabled: false,
+    style: TextStyle(
+      color: Colors.black, // Add this line to set the font color
+    ),
+    controller: txtemail_F,
+    decoration: InputDecoration(
+      labelText: 'Email',
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: black, width: 2.0),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: black, width: 2.0),
+      ),
+      labelStyle: TextStyle(fontWeight: FontWeight.bold),
+    ),
+    validator: (value) {
+      if (value == null || value.isEmpty) {
+        return 'Please enter your Voter ID';
+      }
+      return null;
+    },
+  );
 }
 
-Widget phone_textfield(BuildContext context, DataClassVoter postUserModel) {
-  return Text('Phone: ${postUserModel.post?.phone ?? ""}',
-      textAlign: TextAlign.left,
-      style: TextStyle(
-          fontFamily: 'Roboto',
-          color: fontcolour2,
-          fontSize: 19,
-          fontWeight: FontWeight.w600));
+Widget phone(BuildContext context, DataClassVoter postUserModel) {
+  txtphone_F.text = '${postUserModel.post?.phone ?? ""}';
+  return TextFormField(
+    enabled: false,
+    style: TextStyle(
+      color: Colors.black, // Add this line to set the font color
+    ),
+    controller: txtphone_F,
+    decoration: InputDecoration(
+      labelText: 'Phone',
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: black, width: 2.0),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: black, width: 2.0),
+      ),
+      labelStyle: TextStyle(fontWeight: FontWeight.bold),
+    ),
+    validator: (value) {
+      if (value == null || value.isEmpty) {
+        return 'Please enter your Voter ID';
+      }
+      return null;
+    },
+  );
 }
 
-Widget voterid_textfield(BuildContext context, DataClassVoter postUserModel) {
-  return Text('Voter ID: ${postUserModel.post?.voterID ?? ""}',
-      textAlign: TextAlign.left,
-      style: TextStyle(
-          fontFamily: 'Roboto',
-          color: fontcolour2,
-          fontSize: 19,
-          fontWeight: FontWeight.w600));
+Widget voterID(BuildContext context, DataClassVoter postUserModel) {
+  txtvoterID_F.text = '${postUserModel.post?.voterID ?? ""}';
+  return TextFormField(
+    enabled: false,
+    style: TextStyle(
+      color: Colors.black, // Add this line to set the font color
+    ),
+    controller: txtvoterID_F,
+    decoration: InputDecoration(
+      labelText: 'Voter ID',
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: black, width: 2.0),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: black, width: 2.0),
+      ),
+      labelStyle: TextStyle(fontWeight: FontWeight.bold),
+    ),
+    validator: (value) {
+      if (value == null || value.isEmpty) {
+        return 'Please enter your Voter ID';
+      }
+      return null;
+    },
+  );
+}
+
+Widget occupation(BuildContext context, DataClassVoter postUserModel) {
+  txtoccupation_F.text = '${postUserModel.post?.occupation ?? ""}';
+  return TextFormField(
+    enabled: false,
+    style: TextStyle(
+      color: Colors.black, // Add this line to set the font color
+    ),
+    controller: txtoccupation_F,
+    decoration: InputDecoration(
+      labelText: 'Occupation',
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: black, width: 2.0),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: black, width: 2.0),
+      ),
+      labelStyle: TextStyle(fontWeight: FontWeight.bold),
+    ),
+    validator: (value) {
+      if (value == null || value.isEmpty) {
+        return 'Please enter your Voter ID';
+      }
+      return null;
+    },
+  );
 }
