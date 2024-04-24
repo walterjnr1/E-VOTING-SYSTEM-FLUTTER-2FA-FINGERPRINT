@@ -1,7 +1,7 @@
 import 'package:e_voting_2fa_biometric/core/App_constant/constant.dart';
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/provider/data_class_voter.dart';
-import 'package:e_voting_2fa_biometric/features/settings/Presentation/screens/candidate_profile.dart';
+import 'package:e_voting_2fa_biometric/features/auth/Domain/controller_check_if_candidate.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -298,7 +298,7 @@ Widget continuebutton(BuildContext context) {
       margin: const EdgeInsets.all(33),
       width: MediaQuery.of(context).size.width,
       child: ElevatedButton(
-        child: Text("Are you a Candidate ?",
+        child: Text(" View Candidate Profile",
             style: GoogleFonts.roboto(
               textStyle: TextStyle(color: primaryColor, letterSpacing: .5),
               fontSize: 21,
@@ -309,8 +309,7 @@ Widget continuebutton(BuildContext context) {
           backgroundColor: AppColor,
         ),
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => candidateProfile()));
+          validateVoterclass.check_if_candidate(context);
         },
       ),
     ),

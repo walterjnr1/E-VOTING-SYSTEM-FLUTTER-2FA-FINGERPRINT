@@ -6,7 +6,7 @@ import 'package:e_voting_2fa_biometric/features/auth/Data/model/candidate_Model.
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-  Future<CandidateModel?> getSingleCandidatePostData() async {
+  Future<CandidateModel?> getSinglePostData() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
     String? voterid_session = prefs.getString('voterid_session');
    

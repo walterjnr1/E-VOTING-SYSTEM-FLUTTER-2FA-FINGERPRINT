@@ -1,3 +1,4 @@
+import 'package:e_voting_2fa_biometric/core/App_constant/constant.dart';
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/provider/data_class_candidate.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/provider/data_class_voter.dart';
@@ -13,20 +14,21 @@ class candidateProfileWidget extends StatefulWidget {
 }
 
 class _candidateProfileWidgetState extends State<candidateProfileWidget> {
-    @override
-    void initState() {
+  @override
+  void initState() {
     super.initState();
 
-    final postCandidateModel =Provider.of<DataClassCandidate>(context, listen: false);
-    postCandidateModel.getCandidatePostData();
+    final postCandidateModel =
+        Provider.of<DataClassCandidate>(context, listen: false);
+    postCandidateModel.getPostData();
 
-    //final postVoterModel =Provider.of<DataClassVoter>(context, listen: false);
-    //postVoterModel.getPostData();
+    final postVoterModel = Provider.of<DataClassVoter>(context, listen: false);
+    postVoterModel.getPostData();
 
     Future.delayed(Duration(seconds: 2), () {
       setState(() {});
     });
-   }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +36,8 @@ class _candidateProfileWidgetState extends State<candidateProfileWidget> {
   }
 }
 
-Widget header_Section(
-    BuildContext context, DataClassCandidate postCandidateModel) {
+Widget header_Section(BuildContext context,
+    DataClassCandidate postCandidateModel, DataClassVoter postVoterModel) {
   return Container(
     height: 160,
     decoration: BoxDecoration(
@@ -54,10 +56,10 @@ Widget header_Section(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             CircleAvatar(
-              backgroundImage:
-                  //NetworkImage('${img_url}/${postVoterModel.post?.image ?? ""}'),
-                  NetworkImage(
-                      'https://media.istockphoto.com/id/1460124878/photo/social-media-connection-and-woman-typing-on-a-phone-for-communication-app-and-chat-web-search.webp?b=1&s=170667a&w=0&k=20&c=2jxUr_WTdJyMUD0OcnXD1Fdbb63f8TDkTvpcPsA7aHI='),
+              backgroundImage: NetworkImage(
+                  '${img_url}/${postVoterModel.post?.image ?? ""}'),
+              //NetworkImage(
+              //'https://media.istockphoto.com/id/1460124878/photo/social-media-connection-and-woman-typing-on-a-phone-for-communication-app-and-chat-web-search.webp?b=1&s=170667a&w=0&k=20&c=2jxUr_WTdJyMUD0OcnXD1Fdbb63f8TDkTvpcPsA7aHI='),
               minRadius: 50,
               maxRadius: 50,
             ),
@@ -192,11 +194,11 @@ Widget body_section(
               ),
             ),
             subtitle: Text(
-              '${postCandidateModel.post?.status ?? ""}',
+              '${postCandidateModel.post?.status == "1" ? "Active" : "Inactive"}',
               style: GoogleFonts.lato(
-                textStyle: TextStyle(color: fontcolour2, letterSpacing: .5),
+                textStyle: TextStyle(color: successcolour, letterSpacing: .5),
                 fontSize: 17,
-                fontWeight: FontWeight.normal,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -224,30 +226,6 @@ Widget body_section(
           ),
         ),
       ],
-    ),
-  );
-}
-
-Widget continuebutton(BuildContext context) {
-  return Align(
-    alignment: Alignment.bottomCenter,
-    child: Container(
-      height: 55,
-      margin: const EdgeInsets.all(33),
-      width: MediaQuery.of(context).size.width,
-      child: ElevatedButton(
-        child: Text("Are you a Candidate ?",
-            style: GoogleFonts.roboto(
-              textStyle: TextStyle(color: primaryColor, letterSpacing: .5),
-              fontSize: 21,
-              fontWeight: FontWeight.bold,
-              //fontStyle: FontStyle.italic,
-            )),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColor,
-        ),
-        onPressed: () => null,
-      ),
     ),
   );
 }

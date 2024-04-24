@@ -6,9 +6,9 @@ class DataClassCandidate extends ChangeNotifier {
   CandidateModel? post;
   bool loading = false;
 
-  getCandidatePostData() async {
+  getPostData() async {
     loading = true;
-    CandidateModel? fetchedPost = await getSingleCandidatePostData();
+    CandidateModel? fetchedPost = await getSinglePostData();
     if (fetchedPost != null) {
       post = fetchedPost;
     }

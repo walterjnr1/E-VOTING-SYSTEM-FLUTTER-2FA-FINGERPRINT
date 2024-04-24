@@ -18,11 +18,11 @@ class _candidateProfileState extends State<candidateProfile> {
     super.initState();
 
     final postCandidateModel = Provider.of<DataClassCandidate>(context, listen: false);
-    postCandidateModel.getCandidatePostData();
+    postCandidateModel.getPostData();
 
 
-    //final postVoterModel = Provider.of<DataClassVoter>(context, listen: false);
-    //postVoterModel.getPostData();
+    final postVoterModel = Provider.of<DataClassVoter>(context, listen: false);
+    postVoterModel.getPostData();
 
     Future.delayed(Duration(seconds: 2), () {
       if (mounted) {
@@ -34,6 +34,7 @@ class _candidateProfileState extends State<candidateProfile> {
   @override
   Widget build(BuildContext context) {
     final postCandidateModel = Provider.of<DataClassCandidate>(context);
+    final postVoterModel = Provider.of<DataClassVoter>(context);
 
     return Scaffold(
       appBar: BaseAppBar(
@@ -51,9 +52,8 @@ class _candidateProfileState extends State<candidateProfile> {
       ),
       body: ListView(
         children: <Widget>[
-          header_Section(context, postCandidateModel ),
+          header_Section(context, postCandidateModel,postVoterModel ),
           body_section(context, postCandidateModel  ),
-          continuebutton(context),
         ],
       ),
     );
