@@ -1,85 +1,87 @@
+import 'package:e_voting_2fa_biometric/core/App_constant/constant.dart';
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
+import 'package:e_voting_2fa_biometric/features/auth/Presentation/provider/data_class_voter.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class candidateregisterWidget extends StatefulWidget {
   @override
-  _candidateregisterWidgetState createState() => new _candidateregisterWidgetState();
+  _candidateregisterWidgetState createState() =>
+      new _candidateregisterWidgetState();
 }
 
 class _candidateregisterWidgetState extends State<candidateregisterWidget> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return RefreshIndicator(
+      onRefresh: () async {
+        // Add your refresh logic here
+      },
+      child: Scaffold(
+          // Add your other widgets here
+          ),
+    );
   }
 }
 
-Widget header_text(BuildContext context) {
-  return Center(
-      child: Text('Candiate registration form',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              fontFamily: 'Roboto',
-              color: fontcolour2,
-              fontSize: 21,
-              fontWeight: FontWeight.w600)));
-}
-Widget header_img(BuildContext context) {
+Widget header_img(BuildContext context, DataClassVoter postUserModel) {
   return Center(
     child: CircleAvatar(
-      backgroundImage: AssetImage('assets/images/register.jpg'),
-      minRadius: 44,
-      maxRadius: 55,
+      backgroundImage:
+          NetworkImage('${img_url}/${postUserModel.post?.image ?? ""}'),
+      //NetworkImage(
+      //'https://media.istockphoto.com/id/1460124878/photo/social-media-connection-and-woman-typing-on-a-phone-for-communication-app-and-chat-web-search.webp?b=1&s=170667a&w=0&k=20&c=2jxUr_WTdJyMUD0OcnXD1Fdbb63f8TDkTvpcPsA7aHI='),
+      minRadius: 66,
+      maxRadius: 66,
     ),
   );
 }
 
-Widget voterid_textfield(
-    BuildContext context, TextEditingController txtvoterid) {
-  return TextFormField(
-    controller: txtvoterid,
-    //initialValue: '${postUserModel.post?.phone ?? ""}',
-    decoration: InputDecoration(
-      labelText: 'Voter ID',
-      enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: black, width: 2.0),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: black, width: 2.0),
-      ),
-      labelStyle: TextStyle(fontWeight: FontWeight.bold),
-    ),
-    validator: (value) {
-      if (value == null || value.isEmpty) {
-        return 'Please enter your Voter ID';
-      }
-      return null;
-    },
-    //onSaved: (value) => ,
-  );
+Widget fullname_textfield(BuildContext context, DataClassVoter postUserModel) {
+  return Text('Fullname: ${postUserModel.post?.fullname ?? ""}',
+      textAlign: TextAlign.left,
+      style: TextStyle(
+          fontFamily: 'Roboto',
+          color: fontcolour2,
+          fontSize: 19,
+          fontWeight: FontWeight.w600));
 }
 
+Widget state_textfield(BuildContext context, DataClassVoter postUserModel) {
+  return Text('State: ${postUserModel.post?.state ?? ""}',
+      textAlign: TextAlign.left,
+      style: TextStyle(
+          fontFamily: 'Roboto',
+          color: fontcolour2,
+          fontSize: 19,
+          fontWeight: FontWeight.w600));
+}
 
-Widget registerbutton(BuildContext context) {
-  return Container(
-      child: Padding(
-    padding: EdgeInsets.symmetric(vertical: 16.0),
-    child: Container(
-        padding: const EdgeInsets.only(left: 10, right: 10),
-        width: MediaQuery.of(context).size.width,
-        height: 60,
-        child: ElevatedButton(
-          child: Text("Save",
-              style: GoogleFonts.lato(
-                textStyle: TextStyle(color: primaryColor, letterSpacing: .5),
-                fontSize: 21,
-                fontWeight: FontWeight.w700,
-                //fontStyle: FontStyle.italic,
-              )),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: buttoncolour,
-          ),
-          onPressed: () => null,
-        )),
-  ));
+Widget email_textfield(BuildContext context, DataClassVoter postUserModel) {
+  return Text('Email: ${postUserModel.post?.email ?? ""}',
+      textAlign: TextAlign.left,
+      style: TextStyle(
+          fontFamily: 'Roboto',
+          color: fontcolour2,
+          fontSize: 19,
+          fontWeight: FontWeight.w600));
+}
+
+Widget phone_textfield(BuildContext context, DataClassVoter postUserModel) {
+  return Text('Phone: ${postUserModel.post?.phone ?? ""}',
+      textAlign: TextAlign.left,
+      style: TextStyle(
+          fontFamily: 'Roboto',
+          color: fontcolour2,
+          fontSize: 19,
+          fontWeight: FontWeight.w600));
+}
+
+Widget voterid_textfield(BuildContext context, DataClassVoter postUserModel) {
+  return Text('Voter ID: ${postUserModel.post?.voterID ?? ""}',
+      textAlign: TextAlign.left,
+      style: TextStyle(
+          fontFamily: 'Roboto',
+          color: fontcolour2,
+          fontSize: 19,
+          fontWeight: FontWeight.w600));
 }

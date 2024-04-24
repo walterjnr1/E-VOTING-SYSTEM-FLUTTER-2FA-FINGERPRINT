@@ -1,7 +1,11 @@
 import 'package:e_voting_2fa_biometric/core/Appbar.dart';
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
+import 'package:e_voting_2fa_biometric/features/auth/Domain/controller_candidate_Register.dart';
+import 'package:e_voting_2fa_biometric/features/auth/Presentation/provider/data_class_voter.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/widgets/register_candidate.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class candidateregister extends StatefulWidget {
   @override
@@ -10,17 +14,33 @@ class candidateregister extends StatefulWidget {
 
 class _candidateregisterState extends State<candidateregister> {
   bool isLoading = false;
-  TextEditingController txtvoterid = TextEditingController();
-  TextEditingController txtpassword = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    //checkConnectivity(context);
+    final postUserModel = Provider.of<DataClassVoter>(context, listen: false);
+    postUserModel.getPostData();
+
+    Future.delayed(Duration(seconds: 2), () {
+      if (this.mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
+      ;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final postUserModel = Provider.of<DataClassVoter>(context);
+
     return Scaffold(
       appBar: BaseAppBar(
         title: Text(
-          '',
+          'Candiate Registration',
           style: TextStyle(
-            fontSize: 24,
+            fontSize: 21,
             fontWeight: FontWeight.bold,
             color: fontcolour,
           ),
@@ -33,48 +53,126 @@ class _candidateregisterState extends State<candidateregister> {
           shrinkWrap: true,
           padding: EdgeInsets.only(left: 24.0, right: 24.0),
           children: <Widget>[
-            header_text(context),
-            SizedBox(height: 11.0),
-            header_img(context),
-            voterid_textfield(context, txtvoterid),
+            SizedBox(height: 3.0),
+            header_img(context, postUserModel),
             SizedBox(height: 12.0),
-               office_textfield(context, txtvoterid),
+            fullname_textfield(context, postUserModel),
             SizedBox(height: 12.0),
+            voterid_textfield(context, postUserModel),
+            SizedBox(height: 12.0),
+            phone_textfield(context, postUserModel),
+            SizedBox(height: 12.0),
+            email_textfield(context, postUserModel),
+            SizedBox(height: 12.0),
+            state_textfield(context, postUserModel),
+            SizedBox(height: 12.0),
+            partydropdownwidget(),
+            SizedBox(height: 12.0),
+            officedropdownwidget(),
+            SizedBox(height: 12.0),
+            registerbutton(context),
           ],
         ),
       ),
     );
   }
 
-
-
-
-  String selectedoffice = "Select Office";
- Widget office_textfield(
-    BuildContext context, TextEditingController cmdmaritalstatus) {
-  return Container(
-    decoration: BoxDecoration(
-      border: Border.all(color:fontcolour2, width: 2.0),
-      //borderRadius: BorderRadius.circular(5.0),
-    ),
-    child: Padding(
-      padding: EdgeInsets.only(left: 10.0), // Add padding here
-      child: DropdownButton<String>(
-        value: selectedoffice,
+  DropdownButtonFormField<String> officedropdownwidget() {
+    return DropdownButtonFormField(
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: fontcolour2, width: 2.0),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: fontcolour2, width: 2.0),
+          ),
+        ),
+        dropdownColor: primaryColor,
+        value: cmdoffice,
         onChanged: (String? newValue) {
           setState(() {
-            selectedoffice = newValue!;
+            cmdoffice = newValue!;
           });
         },
-        items: <DropdownMenuItem<String>>[
-          const DropdownMenuItem(
-              child: Text("Select Office"),
-              value: "Select Office"),
-          const DropdownMenuItem(child: Text("President"), value: "President"),
-          const DropdownMenuItem(child: Text("Governor"), value: "Governor"),
-        ],
-      ),
-    ),
-  );
-}
+        items: dropdownItems_office);
+  }
+
+  DropdownButtonFormField<String> partydropdownwidget() {
+    return DropdownButtonFormField(
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: fontcolour2, width: 2.0),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: fontcolour2, width: 2.0),
+          ),
+        ),
+        dropdownColor: primaryColor,
+        value: cmdparty,
+        onChanged: (String? newValue) {
+          setState(() {
+            cmdparty = newValue!;
+          });
+        },
+        items: dropdownItems_party);
+  }
+
+  Widget registerbutton(BuildContext context) {
+    return Container(
+        padding: const EdgeInsets.only(left: 10, right: 10),
+        width: MediaQuery.of(context).size.width,
+        height: 60,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: AppColor, shape: const StadiumBorder()),
+          onPressed: () {
+            setState(() {
+              isLoading = true;
+            });
+
+            Future.delayed(const Duration(seconds: 5), () {
+              setState(() {
+                isLoading = true;
+
+                registerclass.register(context);
+                isLoading = false;
+              });
+            });
+          },
+          child: isLoading
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Loading...',
+                      style: GoogleFonts.lato(
+                          textStyle:
+                              TextStyle(color: primaryColor, letterSpacing: .5),
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          height: 3.0
+                          //fontStyle: FontStyle.italic,
+                          ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    CircularProgressIndicator(
+                      color: primaryColor,
+                    ),
+                  ],
+                )
+              : Text('Register',
+                  style: GoogleFonts.lato(
+                      textStyle:
+                          TextStyle(color: primaryColor, letterSpacing: .5),
+                      fontSize: 19,
+                      fontWeight: FontWeight.bold,
+                      height: 3.0
+                      //fontStyle: FontStyle.italic,
+                      )),
+        ));
+  }
 }

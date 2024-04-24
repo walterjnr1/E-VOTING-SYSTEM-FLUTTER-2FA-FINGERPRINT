@@ -1,11 +1,11 @@
+import 'package:e_voting_2fa_biometric/core/App_constant/constant.dart';
+import 'package:e_voting_2fa_biometric/features/auth/Presentation/provider/data_class_voter.dart';
+import 'package:e_voting_2fa_biometric/features/dashboard/Presentation/widgets/dashboard_home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
-import 'package:e_voting_2fa_biometric/features/dashboard/Presentation/widgets/dashboard_home.dart';
 import 'package:e_voting_2fa_biometric/features/dashboard/Presentation/widgets/slider.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 class dashboardScreen extends StatefulWidget {
   const dashboardScreen({Key? key}) : super(key: key);
@@ -18,19 +18,53 @@ class _dashboardScreenState extends State<dashboardScreen> {
   bool isLoading = true;
 
   @override
+  void initState() {
+    super.initState();
+    final postUserModel = Provider.of<DataClassVoter>(context, listen: false);
+    postUserModel.getPostData();
+
+    Future.delayed(Duration(seconds: 2), () {
+      if (this.mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
+      ;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final postUserModel = Provider.of<DataClassVoter>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Stack(
           children: [
             Text(
-              'Hi, Ndueso Walter',
+              'Hi, ${postUserModel.post?.fullname ?? ""}',
               style: GoogleFonts.lato(
                 textStyle: TextStyle(
                   color: AppColor,
                   letterSpacing: .5,
-                  fontSize: 17,
+                  fontSize: 13,
                   fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            SizedBox(height: 35),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              child: Text(
+                '${postUserModel.post?.voterID ?? ""}',
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                    color: AppColor,
+                    letterSpacing: .5,
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
@@ -39,10 +73,12 @@ class _dashboardScreenState extends State<dashboardScreen> {
         leading: Padding(
           padding: EdgeInsets.only(left: 14.0),
           child: CircleAvatar(
-            radius: 30.0,
-            backgroundImage: CachedNetworkImageProvider(
-                'https://media.istockphoto.com/id/1406307321/photo/portrait-of-successful-mature-businessman-standing-in-office.jpg?s=612x612&w=0&k=20&c=APB5rnVGubmhg4LmFyZJBBUU_duWEgbJ1m3AcygIeXw='),
-            backgroundColor: Colors.transparent,
+            backgroundImage:
+                NetworkImage('${img_url}/${postUserModel.post?.image ?? ""}'),
+            // NetworkImage(
+            // 'https://media.istockphoto.com/id/1460124878/photo/social-media-connection-and-woman-typing-on-a-phone-for-communication-app-and-chat-web-search.webp?b=1&s=170667a&w=0&k=20&c=2jxUr_WTdJyMUD0OcnXD1Fdbb63f8TDkTvpcPsA7aHI='),
+            minRadius: 66,
+            maxRadius: 66,
           ),
         ),
         actions: <Widget>[
@@ -98,7 +134,7 @@ class _dashboardScreenState extends State<dashboardScreen> {
                     visible: visible,
                     child: how_to_use(context),
                   ),
-                  //AddRequest(context)
+                  registerCandidate(context)
                 ])),
           ],
         ),
@@ -110,7 +146,7 @@ class _dashboardScreenState extends State<dashboardScreen> {
     BuildContext context,
   ) {
     return Container(
-      height: 250,
+      height: 270,
       child: Card(
         //color: bgColor2,
         //margin: EdgeInsets.all(5),
@@ -135,9 +171,9 @@ class _dashboardScreenState extends State<dashboardScreen> {
                 ' 1. Register as a voter\n 2. Register as a candidate if necesssary\n 3. login by providing voter ID and password\n 4. Enter OTP will be sent to your register phone Number or Email\n 5. Scan your fingerprint\n 6. Select type of election\n 7. Vote on your candidate of choice',
                 style: GoogleFonts.lato(
                   textStyle: TextStyle(color: fontcolour2, letterSpacing: .5),
-                  fontSize: 15,
+                  fontSize: 12.5,
                   fontWeight: FontWeight.normal,
-                  height: 1.5, // Add this line to set the line height
+                  //height: 1.5, // Add this line to set the line height
                 )),
             trailing: Icon(Icons.cancel),
             onTap: () {

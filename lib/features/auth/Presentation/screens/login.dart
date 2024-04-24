@@ -1,5 +1,6 @@
 import 'package:e_voting_2fa_biometric/core/Appbar.dart';
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
+import 'package:e_voting_2fa_biometric/features/auth/Domain/controllerLogin.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/widgets/login.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,6 @@ class voterlogin extends StatefulWidget {
 
 class _voterloginState extends State<voterlogin> {
   bool isLoading = false;
-  TextEditingController txtvoterid = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +35,9 @@ class _voterloginState extends State<voterlogin> {
             header_text(context),
             SizedBox(height: 11.0),
             header_img(context),
-            voterid_textfield(context, txtvoterid),
+            voterid_textfield(context, txtvoterid_F),
             SizedBox(height: 20.0),
-            //password_textfield(context, txtpassword, obscureText, toggle),
-            loginbutton(context),
+            voterloginWidget(),
             SizedBox(height: 2.0),
             RegisterLabel(context),
             SizedBox(width: 5.0),
@@ -46,7 +45,6 @@ class _voterloginState extends State<voterlogin> {
               children: <Widget>[
                 voter_signup_button(context),
                 SizedBox(width: 5.0),
-                candidate_signup_button(context),
               ],
             )
           ],

@@ -1,12 +1,12 @@
-import 'package:e_voting_2fa_biometric/features/auth/Presentation/widgets/voter_register_success.dart';
+import 'package:e_voting_2fa_biometric/features/auth/Presentation/widgets/success.dart';
 import 'package:flutter/material.dart';
 
-class voterRegistrationsuccess extends StatefulWidget {
+class success extends StatefulWidget {
   @override
-  _voterRegistrationsuccessState createState() => new _voterRegistrationsuccessState();
+  _successState createState() => new _successState();
 }
 
-class _voterRegistrationsuccessState extends State<voterRegistrationsuccess> {
+class _successState extends State<success> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

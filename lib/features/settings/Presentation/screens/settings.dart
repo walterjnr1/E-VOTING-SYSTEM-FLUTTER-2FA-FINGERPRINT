@@ -33,7 +33,10 @@ class _settingsState extends State<settings> {
                 scrollDirection: Axis.vertical,
                 child: Container(
                     child: Column(children: [
-                  logout_btn(context),
+                  //logout_btn(context),
+                  SizedBox(height: 15),
+
+                  logout_card(context),
                   SizedBox(height: 15),
                   profile_card(context),
                   SizedBox(height: 15),

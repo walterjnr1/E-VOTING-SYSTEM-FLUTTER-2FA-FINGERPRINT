@@ -1,15 +1,17 @@
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
-import 'package:e_voting_2fa_biometric/features/auth/Presentation/widgets/otp.dart';
+import 'package:e_voting_2fa_biometric/features/auth/Presentation/widgets/login_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:e_voting_2fa_biometric/features/auth/Domain/controller_login_OTP.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
-class otp extends StatefulWidget {
+class login_otp extends StatefulWidget {
   @override
-  _otpState createState() => new _otpState();
+  _login_otpState createState() => new _login_otpState();
 }
 
-class _otpState extends State<otp> {
-    bool isLoading = false;
+class _login_otpState extends State<login_otp> {
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class _otpState extends State<otp> {
             msg_text(context),
             SizedBox(height: 20.0),
             SizedBox(height: 15.0),
-            otpWidget(),
+            pincode(context, txtotp_F),
             SizedBox(height: 15.0),
             footer_text(context),
             SizedBox(height: 10.0),
@@ -55,7 +57,7 @@ class _otpState extends State<otp> {
               setState(() {
                 isLoading = true;
 
-                //validateOTPclass.otp(context);
+                validateLoginOTPclass.login_otp(context);
                 isLoading = false;
               });
             });
@@ -94,5 +96,48 @@ class _otpState extends State<otp> {
                       )),
         ));
   }
-}
 
+  Widget pincode(BuildContext context, txtotp_F) {
+    return PinCodeTextField(
+      length: 5,
+      //obscureText: true,
+      animationType: AnimationType.fade,
+      pinTheme: PinTheme(
+          shape: PinCodeFieldShape.box,
+          borderRadius: BorderRadius.circular(5),
+          fieldHeight: 50,
+          fieldWidth: 40,
+          activeFillColor: primaryColor,
+          inactiveColor: AppColor,
+          inactiveFillColor: primaryColor,
+          selectedFillColor: Light_bgColor,
+          selectedColor: successcolour,
+          activeColor: AppColor),
+      cursorColor: fontcolour2,
+      animationDuration: const Duration(milliseconds: 300),
+      enableActiveFill: true,
+      controller: txtotp_F,
+      keyboardType: TextInputType.text,
+      boxShadows: const [
+        BoxShadow(
+          offset: Offset(0, 1),
+          color: fontcolour2,
+          blurRadius: 10,
+        )
+      ],
+      onCompleted: (v) {
+        debugPrint("Completed");
+      },
+      onChanged: (value) {
+        debugPrint(value);
+        setState(() {
+          currentText = value;
+        });
+      },
+      beforeTextPaste: (text) {
+        return true;
+      },
+      appContext: context,
+    );
+  }
+}

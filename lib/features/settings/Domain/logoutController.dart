@@ -7,7 +7,9 @@ Future<void> logout(BuildContext context) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   // Remove the user data from shared preferences
+  await prefs.remove('voterid_session');
   await prefs.remove('email_session');
+  await prefs.remove('phone_session');
 
 
   // Clear the cache to ensure that the user is fully logged out

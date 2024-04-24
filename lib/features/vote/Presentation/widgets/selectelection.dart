@@ -1,7 +1,6 @@
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/screens/login.dart';
 import 'package:e_voting_2fa_biometric/features/vote/Presentation/screens/candidates.dart';
-import 'package:e_voting_2fa_biometric/features/vote/Presentation/screens/vote.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

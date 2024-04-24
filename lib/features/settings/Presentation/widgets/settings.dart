@@ -1,12 +1,11 @@
-import 'package:e_voting_2fa_biometric/features/auth/Presentation/screens/login.dart';
 import 'package:e_voting_2fa_biometric/features/settings/Domain/logoutController.dart';
 import 'package:e_voting_2fa_biometric/features/settings/Presentation/screens/changepassword.dart';
-import 'package:e_voting_2fa_biometric/features/settings/Presentation/screens/profile.dart';
+import 'package:e_voting_2fa_biometric/features/settings/Presentation/screens/voter_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
-import 'package:provider/provider.dart';
+import 'package:e_voting_2fa_biometric/features/settings/Domain/controllerDeleteAccount.dart';
 
 class settingswidget extends StatefulWidget {
   const settingswidget({super.key});
@@ -20,38 +19,6 @@ class _settingswidgetState extends State<settingswidget> {
   Widget build(BuildContext context) {
     return Scaffold();
   }
-}
-
-Widget profile_Section(BuildContext context) {
-  return Container(
-    height: 110,
-    // set the width of this Container to 100% screen width
-    width: double.infinity,
-    decoration: const BoxDecoration(color: AppColor),
-    child: Column(
-      // Vertically center the widget inside the column
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SizedBox(height: 3),
-        Text('Ndueso Walter',
-            style: GoogleFonts.roboto(
-              textStyle: TextStyle(color: primaryColor, letterSpacing: .5),
-              fontSize: 17,
-              fontWeight: FontWeight.bold,
-              //fontStyle: FontStyle.italic,
-            )),
-        SizedBox(height: 1),
-        Text('(Candidate)',
-            style: GoogleFonts.lato(
-              textStyle: TextStyle(color: primaryColor, letterSpacing: .5),
-              fontSize: 17,
-              fontWeight: FontWeight.w700,
-              fontStyle: FontStyle.italic,
-            )),
-        SizedBox(height: 4),
-      ],
-    ),
-  );
 }
 
 Widget logout_btn(BuildContext context) {
@@ -138,7 +105,66 @@ Widget profile_card(BuildContext context) {
           trailing: Icon(Icons.arrow_right),
           onTap: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => profile()));
+                context, MaterialPageRoute(builder: (context) => voterProfile()));
+          },
+        ),
+      ));
+}
+
+Widget logout_card(BuildContext context) {
+  return Container(
+      height: 58,
+      child: Card(
+        margin: const EdgeInsets.all(0),
+        child: ListTile(
+          leading: Icon(Icons.logout),
+          title: Text("Logout"),
+          trailing: Icon(Icons.arrow_right),
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Align(
+                      alignment: Alignment.center,
+                      child: Text("Logout",
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                                color: fontcolour2, letterSpacing: .5),
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700,
+                            // fontStyle: FontStyle.italic,
+                          ))),
+                  content: const Text('Are you sure you want to Logout ?'),
+                  actions: <Widget>[
+                    ElevatedButton(
+                      child: Text("No",
+                          style: TextStyle(
+                              color: primaryColor,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold)),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: errorcolour,
+                      ),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                    ElevatedButton(
+                      child: Text("Yes",
+                          style: TextStyle(
+                              color: primaryColor,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold)),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColor,
+                      ),
+                      onPressed: () {
+                        logout(context);
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
           },
         ),
       ));
@@ -198,7 +224,7 @@ Widget deleteAccount_card(BuildContext context) {
                       backgroundColor: buttoncolour,
                     ),
                     onPressed: () {
-                      //deleteAccountClass.DeleteAccount(context);
+                      DeleteAccountClass.DeleteAccount(context);
                     },
                   ),
                 ],
@@ -222,8 +248,8 @@ Widget changePassword_card(BuildContext context) {
           // subtitle: Text("Talk to our Agent"),
           trailing: Icon(Icons.arrow_right),
           onTap: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => changepassword()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => changepassword()));
           },
         ),
       ));

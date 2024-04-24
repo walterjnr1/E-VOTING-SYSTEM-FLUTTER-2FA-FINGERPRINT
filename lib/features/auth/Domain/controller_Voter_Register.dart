@@ -2,11 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:e_voting_2fa_biometric/core/App_constant/constant.dart';
-import 'package:e_voting_2fa_biometric/core/colour/color.dart';
-import 'package:e_voting_2fa_biometric/features/auth/Presentation/screens/otp.dart';
-import 'package:e_voting_2fa_biometric/features/auth/Presentation/screens/voter_register_success.dart';
+import 'package:e_voting_2fa_biometric/features/auth/Presentation/screens/register_otp.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
@@ -60,7 +57,7 @@ List<DropdownMenuItem<String>> get dropdownItems_State {
     const DropdownMenuItem(child: Text("Littoral"), value: "Littoral"),
     const DropdownMenuItem(child: Text("North"), value: "North"),
     const DropdownMenuItem(child: Text("Northwest"), value: "Northwest"),
-    const DropdownMenuItem(child: Text("South"), value: "Southwest"),
+    const DropdownMenuItem(child: Text("South"), value: "South"),
     const DropdownMenuItem(child: Text("Southwest"), value: "Southwest"),
     const DropdownMenuItem(child: Text("West"), value: "West"),
   ];
@@ -86,60 +83,51 @@ List<DropdownMenuItem<String>> get dropdownItems_Qualification {
   return menuItems;
 }
 
-class registerclass {
-  static Future<void> register(BuildContext context, File pickedimage) async {
+class registerVoter1 {
+  static Future<void> registerVoter(
+      BuildContext context, File pickedimage) async {
     //store details
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('email_session', txtemail_F.text);
     prefs.setString('phone_session', txtphone_F.text);
 
-    var uri = "${URL_PREFIX}/voter_register.php";
-    var request = http.MultipartRequest('POST', Uri.parse(uri));
+    var headers = {'Accept': 'application/json'};
+    var request =
+        http.MultipartRequest('POST', Uri.parse('${URL_PREFIX}/registerVoter'));
 
-    //add text fields
-    request.fields["txtfullname"] = txtfullname_F.text;
-    request.fields["cmdsex"] = cmdsex;
-    request.fields["txtdob"] = txtdob_F.text;
-    request.fields["cmdmaritalstatus"] = cmdmaritalstatus;
-    request.fields["txtphone"] = txtphone_F.text;
-    request.fields["txtemail"] = txtemail_F.text;
-    request.fields["txtaddress"] = txtaddress_F.text;
-    request.fields["txtlga"] = txtlga_F.text;
-    request.fields["cmdstate"] = cmdstate;
-    request.fields["txtoccupation"] = txtoccupation_F.text;
-    request.fields["cmdqualification"] = cmdqualification;
+    request.fields.addAll({
+      'fullname': txtfullname_F.text,
+      'maritalstatus': cmdmaritalstatus,
+      'sex': cmdsex,
+      'DOB': txtdob_F.text,
+      'phone': txtphone_F.text,
+      'email': txtemail_F.text,
+      'address': txtaddress_F.text,
+      'lga': txtlga_F.text,
+      'state': cmdstate,
+      'occupation': txtoccupation_F.text,
+      'status': '1',
+      'educational_qualification': cmdqualification
+    });
 
-    var pic = await http.MultipartFile.fromPath("image", pickedimage.path);
+    request.files
+        .add(await http.MultipartFile.fromPath('image', pickedimage.path));
+    request.headers.addAll(headers);
+    http.StreamedResponse response = await request.send();
 
-    request.files.add(pic);
-    //var response = await request.send();
+    String message = await response.stream.transform(utf8.decoder).join();
+    print(message);
 
-    await request.send().then((result) {
-      http.Response.fromStream(result).then((response) {
-     var message = jsonDecode(response.body);
-    if (message == "success") {
-       // if (response.statusCode == 200) {
-
-      Navigator.push(context, MaterialPageRoute(builder: (context) => otp()));
-   
-          } else if (message == "Voter Already Exist") {
-        showTopSnackBar(
+    if (response.statusCode == 200) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => register_otp()));
+    } else {
+      showTopSnackBar(
         Overlay.of(context),
         CustomSnackBar.error(
           message: message,
         ),
       );
-      } else {
-            showTopSnackBar(
-        Overlay.of(context),
-        CustomSnackBar.error(
-          message: message,
-        ),
-      );
-          }
-        });
-      }).catchError((e) {
-        print(e);
-      });
     }
   }
+}

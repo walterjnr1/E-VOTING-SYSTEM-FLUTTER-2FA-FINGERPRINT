@@ -1,3 +1,4 @@
+import 'package:e_voting_2fa_biometric/features/auth/Presentation/screens/login.dart';
 import 'package:e_voting_2fa_biometric/features/dashboard/Presentation/screens/dashboard_bottombar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,10 +8,12 @@ class voterRegistrationsuccesswidget extends StatefulWidget {
   const voterRegistrationsuccesswidget({super.key});
 
   @override
-  State<voterRegistrationsuccesswidget> createState() => _voterRegistrationsuccesswidgetState();
+  State<voterRegistrationsuccesswidget> createState() =>
+      _voterRegistrationsuccesswidgetState();
 }
 
-class _voterRegistrationsuccesswidgetState extends State<voterRegistrationsuccesswidget> {
+class _voterRegistrationsuccesswidgetState
+    extends State<voterRegistrationsuccesswidget> {
   @override
   Widget build(BuildContext context) {
     return Container();
@@ -18,7 +21,7 @@ class _voterRegistrationsuccesswidgetState extends State<voterRegistrationsucces
 }
 
 Widget successimage_Section =
-    Icon(Icons.check_circle, size: 150, color: bgColor);
+    Icon(Icons.check_circle, size: 150, color: successcolour);
 
 PreferredSizeWidget AppbarSection(BuildContext context) {
   return AppBar(
@@ -31,11 +34,11 @@ PreferredSizeWidget AppbarSection(BuildContext context) {
             style: TextStyle(
               fontSize: 17,
               fontWeight: FontWeight.bold,
-              color: bgColor,
+              color: successcolour,
             )),
         onPressed: () {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => BottomMenu()));
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => BottomMenu()));
         },
       )
     ],
@@ -49,7 +52,7 @@ Widget Addedtext(BuildContext context) {
     child: Text("Success",
         textAlign: TextAlign.center,
         style: GoogleFonts.lato(
-          textStyle: TextStyle(color: AppColor, letterSpacing: .5),
+          textStyle: TextStyle(color: successcolour, letterSpacing: .5),
           fontSize: 21,
           fontWeight: FontWeight.w700,
           //fontStyle: FontStyle.italic,

@@ -1,4 +1,3 @@
-import 'package:e_voting_2fa_biometric/features/auth/Presentation/screens/login.dart';
 import 'package:e_voting_2fa_biometric/features/dashboard/Presentation/screens/dashboard_home.dart';
 import 'package:e_voting_2fa_biometric/features/dashboard/Presentation/widgets/dashboard_bottombar.dart';
 import 'package:e_voting_2fa_biometric/features/settings/Presentation/screens/settings.dart';

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-const Color bgColor = Color.fromRGBO(191, 80, 243, 1);
+const Color bgColor = Color.fromARGB(255, 2, 53, 2);
 const Color Light_bgColor = Color.fromARGB(255, 115, 160, 197);
 const Color bgColor2 = Color.fromARGB(255, 255, 255, 255);
 const Color custompaintColor = Color.fromRGBO(191, 80, 243, 1);
 const Color primaryColor = Colors.white;
-const Color AppColor = Color.fromRGBO(191, 80, 243, 1);
+const Color AppColor = Color.fromARGB(255, 2, 53, 2);
 const Color fontcolour = Colors.white;
 const Color fontcolour2 = Color.fromARGB(255, 16, 17, 16);
 const Color black = Color.fromARGB(255, 16, 17, 16);

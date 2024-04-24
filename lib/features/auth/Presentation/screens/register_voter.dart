@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:e_voting_2fa_biometric/core/Appbar.dart';
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
-import 'package:e_voting_2fa_biometric/features/auth/Domain/controllerRegister.dart';
+import 'package:e_voting_2fa_biometric/features/auth/Domain/controller_voter_Register.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/widgets/register_voter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,7 +20,7 @@ class _voterregisterState extends State<voterregister> {
   Future pickImage() async {
     try {
       final pickedimage =
-      await ImagePicker().pickImage(source: ImageSource.gallery);
+          await ImagePicker().pickImage(source: ImageSource.gallery);
 
       if (pickedimage == null) return;
       final imageTemp = File(pickedimage.path);
@@ -36,9 +36,9 @@ class _voterregisterState extends State<voterregister> {
     return Scaffold(
       appBar: BaseAppBar(
         title: Text(
-          'Voter Registration Form',
+          'Voter Registration',
           style: TextStyle(
-            fontSize: 24,
+            fontSize: 21,
             fontWeight: FontWeight.bold,
             color: fontcolour,
           ),
@@ -188,7 +188,7 @@ class _voterregisterState extends State<voterregister> {
               setState(() {
                 isLoading = true;
 
-                registerclass.register(context, pickedimage!);
+                registerVoter1.registerVoter(context, pickedimage!);
                 isLoading = false;
               });
             });
