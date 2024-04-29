@@ -32,7 +32,7 @@ class _statisticGovernorState extends State<statisticGovernor> {
     });
 
     final response = await http.get(Uri.parse(
-        '${URL_PREFIX}/getGovernorResult?page=$_currentPage')); //&pageSize=$_pageSize
+        '${URL_PREFIX}/getGovernorResult?page=$_currentPage')); //&pageSize=_pageSize
 
     if (response.statusCode == 201) {
       final jsonData = json.decode(response.body);
@@ -63,6 +63,19 @@ class _statisticGovernorState extends State<statisticGovernor> {
     }
   }
 
+  Future<void> _refreshData() async {
+    setState(() {
+      _isLoading = true;
+      _data.clear(); // Clear the data list before fetching new data
+    });
+
+    await fetchData();
+
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,39 +91,43 @@ class _statisticGovernorState extends State<statisticGovernor> {
         appBar: AppBar(),
         //widgets: <Widget>[],
       ),
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : SingleChildScrollView(
-              child: SizedBox(
-                width: double.infinity,
-                child: PaginatedDataTable(
-                  horizontalMargin:
-                      12, // adjust this value to reduce the horizontal margin between columns
-                  columnSpacing:
-                      12, // adjust this value to reduce the space between each column
-                  header: Text('Scroll Horizontally to See all Fields ',
-                      style: TextStyle(
-                        fontSize: 21,
-                        fontWeight: FontWeight.bold,
-                        color: errorcolour,
-                      )),
-                  rowsPerPage: _pageSize,
-                  availableRowsPerPage: const [10, 25, 50],
-                  onRowsPerPageChanged: (value) {
-                    setState(() {
-                      _pageSize = value!;
-                    });
-                  },
-                  columns: const [
-                    DataColumn(label: Text('Name')),
-                    DataColumn(label: Text('Image')),
-                    DataColumn(label: Text('Votes')),
-                    DataColumn(label: Text('Party')),
-                  ],
-                  source: _DataSource(data: _data),
+      body: RefreshIndicator(
+        onRefresh: _refreshData,
+        child: _isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : SingleChildScrollView(
+                child: SizedBox(
+                  width: double.infinity,
+                  child: PaginatedDataTable(
+                    horizontalMargin:
+                        12, // adjust this value to reduce the horizontal margin between columns
+                    columnSpacing:
+                        12, // adjust this value to reduce the space between each column
+                    header: Text(
+                        'Scroll Vertically and Horizontally to See all Records and columns ',
+                        style: TextStyle(
+                          fontSize: 21,
+                          fontWeight: FontWeight.bold,
+                          color: errorcolour,
+                        )),
+                    rowsPerPage: _pageSize,
+                    availableRowsPerPage: const [10, 25, 50],
+                    onRowsPerPageChanged: (value) {
+                      setState(() {
+                        _pageSize = value!;
+                      });
+                    },
+                    columns: const [
+                      DataColumn(label: Text('Candidate Name')),
+                      DataColumn(label: Text('Image')),
+                      DataColumn(label: Text('Votes')),
+                      DataColumn(label: Text('Party')),
+                    ],
+                    source: _DataSource(data: _data),
+                  ),
                 ),
               ),
-            ),
+      ),
     );
   }
 }
@@ -127,7 +144,9 @@ class _DataSource extends DataTableSource {
     }
     final item = data[index];
     return DataRow(cells: [
-      DataCell(index == 0
+      DataCell(index == 0 &&
+              data[index].count !=
+                  data[index > 0 ? index - 1 : data.length - 1].count
           ? Text('${item.fullname.toString()}-Leading',
               style: TextStyle(
                 fontSize: 13,
