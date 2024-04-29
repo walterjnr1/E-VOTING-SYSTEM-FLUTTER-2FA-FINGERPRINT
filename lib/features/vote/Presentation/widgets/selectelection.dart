@@ -1,6 +1,7 @@
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/screens/login.dart';
-import 'package:e_voting_2fa_biometric/features/vote/Presentation/screens/candidates.dart';
+import 'package:e_voting_2fa_biometric/features/vote/Presentation/screens/GovernorCandidates.dart';
+import 'package:e_voting_2fa_biometric/features/vote/Presentation/screens/PresidentCandidates.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -34,7 +35,7 @@ Widget presidentElection(BuildContext context) {
         color: bgColor,
         margin: const EdgeInsets.all(3),
         child: ListTile(
-          subtitle: Text("Presidential",
+          subtitle: Text("President",
               style: GoogleFonts.lato(
                 textStyle: TextStyle(color: primaryColor, letterSpacing: .5),
                 fontSize: 21,
@@ -44,7 +45,7 @@ Widget presidentElection(BuildContext context) {
           trailing: Icon(Icons.arrow_right),
           onTap: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => candidates()));
+                context, MaterialPageRoute(builder: (context) => PresidentCandidates()));
           },
         ),
       ));
@@ -57,7 +58,7 @@ Widget governorElection(BuildContext context) {
         color: bgColor,
         margin: const EdgeInsets.all(3),
         child: ListTile(
-          subtitle: Text("Governorship",
+          subtitle: Text("Governor",
               style: GoogleFonts.lato(
                 textStyle: TextStyle(color: primaryColor, letterSpacing: .5),
                 fontSize: 21,
@@ -67,7 +68,7 @@ Widget governorElection(BuildContext context) {
           trailing: Icon(Icons.arrow_right),
           onTap: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => voterlogin()));
+                context, MaterialPageRoute(builder: (context) => GovernorCandidates()));
           },
         ),
       ));

@@ -25,8 +25,7 @@ class loginclass {
     var message = data["message"];
 print(message);
     if (response.statusCode == 201) {
-     
-
+  
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('voterid_session', txtvoterid_F.text);
         String? voterid_session = prefs.getString('voterid_session');

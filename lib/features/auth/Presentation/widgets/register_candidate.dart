@@ -24,6 +24,35 @@ class _candidateregisterWidgetState extends State<candidateregisterWidget> {
   }
 }
 
+Widget img_path(BuildContext context, DataClassVoter postUserModel) {
+  txtimg_F.text = '${postUserModel.post?.image?? ""}';
+  return Visibility(
+    visible: false,
+    child: TextFormField(
+      enabled: false,
+      style: TextStyle(
+        color: Colors.black, // Add this line to set the font color
+      ),
+      controller: txtimg_F,
+      decoration: InputDecoration(
+        labelText: 'image',
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: black, width: 2.0),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: black, width: 2.0),
+        ),
+        labelStyle: TextStyle(fontWeight: FontWeight.bold),
+      ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter your Voter ID';
+        }
+        return null;
+      },
+    ),
+  );
+}
 Widget header_img(BuildContext context, DataClassVoter postUserModel) {
   return Center(
     child: CircleAvatar(

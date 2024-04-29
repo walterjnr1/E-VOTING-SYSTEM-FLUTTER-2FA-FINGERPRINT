@@ -14,8 +14,7 @@ TextEditingController txtphone_F = TextEditingController();
 TextEditingController txtemail_F = TextEditingController();
 TextEditingController txtstate_F = TextEditingController();
 TextEditingController txtoccupation_F = TextEditingController();
-
-
+TextEditingController txtimg_F = TextEditingController();
 
 
 //Select office dropdownlist
@@ -37,8 +36,10 @@ String cmdparty = "Select Party";
 List<DropdownMenuItem<String>> get dropdownItems_party {
   List<DropdownMenuItem<String>> menuItems = [
     const DropdownMenuItem(child: Text("Select Party"), value: "Select Party"),
-    const DropdownMenuItem(child: Text("APC"), value: "APC"),
-    const DropdownMenuItem(child: Text("PDP"), value: "PDP"),
+    const DropdownMenuItem(child: Text("Alliance Democratic Party (ADC)"), value: "Alliance Democratic Party (ADC)"),
+    const DropdownMenuItem(child: Text("Labour Party (LP)"), value: "Labour Party (LP)"),
+    const DropdownMenuItem(child: Text("Accord Party (A)"), value: "Accord Party (A)"),
+
   ];
   return menuItems;
 }
@@ -60,6 +61,8 @@ class registerclass {
       "voterID": voterid_session,
       "office": cmdoffice,
       "party": cmdparty,
+      "image": txtimg_F.text,
+
     });
 
     var data = jsonDecode(response.body);

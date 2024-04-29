@@ -10,6 +10,7 @@ class CandidateModel {
   String party;
   String status;
   String election_year;
+  String image;
 
   CandidateModel({
     required this.fullname,
@@ -23,6 +24,8 @@ class CandidateModel {
     required this.party,
     required this.status,
     required this.election_year,
+        required this.image,
+
   });
 
   factory CandidateModel.fromJson(Map<String, dynamic> json) => CandidateModel(
@@ -37,6 +40,8 @@ class CandidateModel {
         party: json["party"],
         status: json["status"],
         election_year: json["election_year"],
+                image: json["image"],
+
       );
   Map<String, dynamic> toJson() => {
         "fullname": fullname,
@@ -50,5 +55,7 @@ class CandidateModel {
         "party": party,
         "status": status,
         "election_year": election_year,
+                "image": image,
+
       };
 }

@@ -54,7 +54,9 @@ class _candidateregisterState extends State<candidateregister> {
           padding: EdgeInsets.only(left: 24.0, right: 24.0),
           children: <Widget>[
             SizedBox(height: 3.0),
+
             header_img(context, postUserModel),
+             img_path(context, postUserModel),
             SizedBox(height: 12.0),
             fullname(context, postUserModel),
             SizedBox(height: 12.0),
@@ -73,6 +75,8 @@ class _candidateregisterState extends State<candidateregister> {
             officedropdownwidget(),
             SizedBox(height: 12.0),
             registerbutton(context),
+
+            
             SizedBox(height: 12.0),
           ],
         ),
