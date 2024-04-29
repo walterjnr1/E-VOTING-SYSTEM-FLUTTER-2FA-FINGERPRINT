@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:e_voting_2fa_biometric/core/App_constant/constant.dart';
 import 'package:e_voting_2fa_biometric/features/vote/Presentation/screens/selectelection.dart';
+import 'package:e_voting_2fa_biometric/features/vote/Presentation/screens/voteSuccess.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,7 +35,7 @@ class VoteClass {
         ),
       );
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => selectElection()));
+          context, MaterialPageRoute(builder: (context) => VoteSuccess()));
     } else {
       showTopSnackBar(
         Overlay.of(context),
@@ -42,6 +43,8 @@ class VoteClass {
           message: message,
         ),
       );
+       Navigator.push(
+          context, MaterialPageRoute(builder: (context) => selectElection()));
     }
   }
   static Future<void> vote_Governor(BuildContext context) async {
@@ -68,7 +71,7 @@ class VoteClass {
         ),
       );
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => selectElection()));
+          context, MaterialPageRoute(builder: (context) => VoteSuccess()));
     } else {
       showTopSnackBar(
         Overlay.of(context),
@@ -76,6 +79,8 @@ class VoteClass {
           message: message,
         ),
       );
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => selectElection()));
     }
   }
 }

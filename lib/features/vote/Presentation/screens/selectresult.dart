@@ -1,21 +1,20 @@
 import 'package:e_voting_2fa_biometric/core/Appbar.dart';
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
+import 'package:e_voting_2fa_biometric/features/vote/Presentation/widgets/selectresult.dart';
 import 'package:flutter/material.dart';
 
-class statistic extends StatefulWidget {
+class selectResult extends StatefulWidget {
   @override
-  _statisticState createState() => _statisticState();
+  _selectResultState createState() => new _selectResultState();
 }
 
-class _statisticState extends State<statistic> {
-  bool isLoading = false;
-
+class _selectResultState extends State<selectResult> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(
         title: Text(
-          'Election Result',
+          '',
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -30,8 +29,11 @@ class _statisticState extends State<statistic> {
           shrinkWrap: true,
           padding: EdgeInsets.only(left: 24.0, right: 24.0),
           children: <Widget>[
-            SizedBox(height: 22.0),
-            //mycandidate(context),
+            header_text(context),
+            SizedBox(height: 44.0),
+            presidentElection(context),
+            SizedBox(height: 20.0),
+            governorElection(context),
           ],
         ),
       ),

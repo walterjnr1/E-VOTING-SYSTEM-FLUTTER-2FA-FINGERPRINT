@@ -2,7 +2,7 @@ import 'package:e_voting_2fa_biometric/features/dashboard/Presentation/screens/d
 import 'package:e_voting_2fa_biometric/features/dashboard/Presentation/widgets/dashboard_bottombar.dart';
 import 'package:e_voting_2fa_biometric/features/settings/Presentation/screens/settings.dart';
 import 'package:e_voting_2fa_biometric/features/vote/Presentation/screens/selectelection.dart';
-import 'package:e_voting_2fa_biometric/features/vote/Presentation/screens/statistic.dart';
+import 'package:e_voting_2fa_biometric/features/vote/Presentation/screens/selectresult.dart';
 import 'package:flutter/material.dart';
 
 class BottomMenu extends StatefulWidget {
@@ -15,7 +15,7 @@ class _BottomMenuState extends State<BottomMenu> {
   List screens = [
     dashboardScreen(),
     selectElection(),
-    statistic(),
+    selectResult(),
     settings(),
     ()
   ];
