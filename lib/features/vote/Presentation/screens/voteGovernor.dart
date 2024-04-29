@@ -15,7 +15,7 @@ class _VoteGovernorState extends State<VoteGovernor> {
   late String new_candidateID = '';
   late String new_fullname = '';
   late String new_party = '';
-  late String new_image = '';
+  late String new_image = 'https://images.unsplash.com/photo-1528460033278-a6ba57020470?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YmxhbmslMjBiYWNrZ3JvdW5kfGVufDB8fDB8fHww';
 
   @override
   void initState() {
@@ -65,7 +65,7 @@ class _VoteGovernorState extends State<VoteGovernor> {
                     child: isLoading
                         ? CircularProgressIndicator()
                         : Image.network(
-                            '${img_url}/${new_image??"https://images.unsplash.com/photo-1528460033278-a6ba57020470?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YmxhbmslMjBiYWNrZ3JvdW5kfGVufDB8fDB8fHww"}',
+                            '${img_url}/${new_image}',
                             width: 200,
                             height: 200,
                             fit: BoxFit.cover,
