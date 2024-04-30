@@ -6,6 +6,7 @@ import 'package:e_voting_2fa_biometric/features/auth/Presentation/screens/regist
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/screens/register_otp.dart';
 import 'package:e_voting_2fa_biometric/features/dashboard/Presentation/screens/dashboard_bottombar.dart';
 import 'package:e_voting_2fa_biometric/features/splash_view/splashview.dart';
+import 'package:e_voting_2fa_biometric/features/vote/Presentation/screens/PresidentCandidates.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => BottomMenu(),
+        '/': (context) => PresidentCandidates(),
       },
     );
   }

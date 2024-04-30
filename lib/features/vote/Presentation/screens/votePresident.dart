@@ -15,7 +15,9 @@ class _VotePresidentState extends State<VotePresident> {
   bool isLoading = false;
   late String new_candidateID = '';
   late String new_fullname = '';
-  late String new_party = '';
+  late String new_partylogo = '';
+  late String new_partyname = '';
+
   late String new_image =
       'https://images.unsplash.com/photo-1528460033278-a6ba57020470?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YmxhbmslMjBiYWNrZ3JvdW5kfGVufDB8fDB8fHww';
 
@@ -26,7 +28,9 @@ class _VotePresidentState extends State<VotePresident> {
       setState(() {
         new_candidateID = prefs.getString('NewCandidateid_session')!;
         new_image = prefs.getString('NewImage_session')!;
-        new_party = prefs.getString('NewParty_session')!;
+        new_partyname = prefs.getString('NewPartyname_session')!;
+        new_partylogo = prefs.getString('NewPartylogo_session')!;
+
         new_fullname = prefs.getString('NewFullname_session')!;
       });
     });
@@ -39,7 +43,7 @@ class _VotePresidentState extends State<VotePresident> {
         title: Text(
           'Presidential Election',
           style: TextStyle(
-            fontSize: 24,
+            fontSize: 21,
             fontWeight: FontWeight.bold,
             color: fontcolour,
           ),
@@ -76,21 +80,27 @@ class _VotePresidentState extends State<VotePresident> {
                   ListTile(
                     title: Center(
                       child: Text(
-                        '${new_fullname}-- ${new_party}',
+                        '${new_fullname}-- ${new_partyname}',
                         style: TextStyle(
                             color: fontcolour2,
-                            fontSize: 17,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
+                  ),
+                  CircleAvatar(
+                    backgroundImage:
+                        NetworkImage('${img_url}/${new_partylogo}'),
+                    // NetworkImage(
+                    // 'https://media.istockphoto.com/id/1460124878/photo/social-media-connection-and-woman-typing-on-a-phone-for-communication-app-and-chat-web-search.webp?b=1&s=170667a&w=0&k=20&c=2jxUr_WTdJyMUD0OcnXD1Fdbb63f8TDkTvpcPsA7aHI='),
+                    minRadius: 40,
+                    maxRadius: 40,
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width,
                     height: 56,
                     child: TextButton(
                       onPressed: () {
-                        //VoteClass.vote_President(context);
-
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {

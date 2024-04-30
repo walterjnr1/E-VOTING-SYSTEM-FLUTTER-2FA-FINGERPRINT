@@ -55,7 +55,7 @@ class CandidateModel {
         "party": party,
         "status": status,
         "election_year": election_year,
-                "image": image,
+        "image": image,
 
       };
 }

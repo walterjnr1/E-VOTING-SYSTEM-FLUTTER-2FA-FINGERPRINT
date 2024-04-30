@@ -2,8 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_voting_2fa_biometric/core/App_constant/constant.dart';
 import 'package:e_voting_2fa_biometric/core/Appbar.dart';
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
-import 'package:e_voting_2fa_biometric/features/auth/Data/model/candidate_Model.dart';
+import 'package:e_voting_2fa_biometric/features/auth/Data/model/candidate_party_model.dart';
 import 'package:e_voting_2fa_biometric/features/vote/Presentation/screens/voteGovernor.dart';
+import 'package:e_voting_2fa_biometric/features/vote/Presentation/screens/votePresident.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -16,29 +17,29 @@ class GovernorCandidates extends StatefulWidget {
 }
 
 class _GovernorCandidatesState extends State<GovernorCandidates> {
-  Future<List<CandidateModel>> getGovernorList() async {
+  Future<List<CandidatePartyModel>> getPresidentList() async {
     final response =
-        await http.get(Uri.parse(("${URL_PREFIX}/selectGovernor")));
+        await http.get(Uri.parse(("${URL_PREFIX}/getGovernorCandidateDetails")));
 
+    print(response.body);
     final items = json.decode(response.body).cast<Map<String, dynamic>>();
-    List<CandidateModel> candidate = items.map<CandidateModel>((json) {
-      return CandidateModel.fromJson(json);
+    List<CandidatePartyModel> candidate =
+        items.map<CandidatePartyModel>((json) {
+      return CandidatePartyModel.fromJson(json);
     }).toList();
     setState(() {
       candidates = candidate;
     });
-
     return candidate;
   }
 
   bool isLoading = false;
-  // String query = '';
-  List<CandidateModel> candidates = [];
-  late Future<List<CandidateModel>> candidate;
+  List<CandidatePartyModel> candidates = [];
+  late Future<List<CandidatePartyModel>> candidate;
   @override
   void initState() {
     super.initState();
-    candidate = getGovernorList();
+    candidate = getPresidentList();
   }
 
   @override
@@ -46,7 +47,7 @@ class _GovernorCandidatesState extends State<GovernorCandidates> {
     return Scaffold(
       appBar: BaseAppBar(
         title: Text(
-          'Governor Election',
+          'Presidential Election',
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -59,11 +60,11 @@ class _GovernorCandidatesState extends State<GovernorCandidates> {
       body: RefreshIndicator(
         onRefresh: () async {
           setState(() {
-            candidate = getGovernorList();
+            candidate = getPresidentList();
           });
         },
         child: Center(
-          child: FutureBuilder<List<CandidateModel>>(
+          child: FutureBuilder<List<CandidatePartyModel>>(
             future: candidate,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
@@ -75,7 +76,6 @@ class _GovernorCandidatesState extends State<GovernorCandidates> {
                   itemCount: snapshot.data?.length,
                   itemBuilder: (context, index) {
                     var data = snapshot.data?[index];
-
                     return GestureDetector(
                       onTap: () async {
                         SharedPreferences prefs =
@@ -87,46 +87,65 @@ class _GovernorCandidatesState extends State<GovernorCandidates> {
                         prefs.setString(
                             'NewFullname_session', data.fullname.toString());
                         prefs.setString(
-                            'NewParty_session', data.party.toString());
-
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => VoteGovernor()));
+                            'NewPartyname_session', data.name.toString());
+prefs.setString(
+                            'NewPartylogo_session', data.logo.toString());
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => VotePresident()));
                       },
                       child: Card(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
                         elevation: 4,
-                        child: Column(
+                        child: Stack(
                           children: [
-                            ClipRRect(
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                              ),
-                              child: CachedNetworkImage(
-                                imageUrl: '${img_url}/${data?.image??"https://images.unsplash.com/photo-1528460033278-a6ba57020470?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YmxhbmslMjBiYWNrZ3JvdW5kfGVufDB8fDB8fHww"}',
-                                height: 145,
-                                width: MediaQuery.of(context).size.width / 0.8,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Row(
+                            Column(
                               children: [
-                                Expanded(
-                                  child: Center(
-                                    child: Text(
-                                      '${data?.fullname}-${data?.party}-${data?.candidateID}',
-                                      style: TextStyle(
-                                          color: successcolour,
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.bold),
-                                    ),
+                                ClipRRect(
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    topRight: Radius.circular(10),
+                                  ),
+                                  child: CachedNetworkImage(
+                                    imageUrl:
+                                        '${img_url}/${data?.image.toString() ?? "https://images.unsplash.com/photo-1528460033278-a6ba57020470?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YmxhbmslMjBiYWNrZ3JvdW5kfGVufDB8fDB8fHww"}',
+                                    height: 145,
+                                    width:
+                                        MediaQuery.of(context).size.width / 0.8,
+                                    fit: BoxFit.fill,
                                   ),
                                 ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Center(
+                                        child: Text(
+                                          '${data?.name.toString()}-${data?.fullname.toString()}-${data?.candidateID}',
+                                          style: TextStyle(
+                                              color: successcolour,
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ],
+                            ),
+                            Positioned(
+                              top: 0,
+                              right: 0,
+                              child: Image.network(
+                                '${img_url}/${data?.logo.toString()}', // replace with your image URL
+                                width: 40,
+                                height: 40,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ],
                         ),
@@ -147,9 +166,9 @@ class _GovernorCandidatesState extends State<GovernorCandidates> {
               } else {
                 return Center(
                   child: CircularProgressIndicator(
-  color: AppColor, // Change the color here
-  strokeWidth: 2.5,
-),
+                    color: AppColor, // Change the color here
+                    strokeWidth: 2.5,
+                  ),
                 );
               }
             },

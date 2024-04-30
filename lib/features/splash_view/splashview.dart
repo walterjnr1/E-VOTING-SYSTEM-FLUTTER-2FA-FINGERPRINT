@@ -64,7 +64,7 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primaryColor,
+      backgroundColor: AppColor,
       body: Center(
         child: AnimatedBuilder(
           animation: _animation,
@@ -89,7 +89,7 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
                 child: Text(
                   'Deploying a Secured Mobile-based E-voting System using 2FA security',
                   style: GoogleFonts.roboto(
-                    textStyle: TextStyle(color: AppColor, letterSpacing: .5),
+                    textStyle: TextStyle(color: primaryColor, letterSpacing: .5),
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
@@ -103,7 +103,7 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
                 child: Text(
                   'Developed by: NGOMESIEGH BORIS MBIZIWUEH, UBa23EP221',
                   style: GoogleFonts.roboto(
-                    textStyle: TextStyle(color: AppColor, letterSpacing: .5),
+                    textStyle: TextStyle(color: primaryColor, letterSpacing: .5),
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
