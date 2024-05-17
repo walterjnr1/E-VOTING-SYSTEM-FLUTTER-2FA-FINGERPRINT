@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:e_voting_2fa_biometric/core/App_constant/constant.dart';
 import 'package:e_voting_2fa_biometric/core/Appbar.dart';
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
-import 'package:e_voting_2fa_biometric/features/auth/Data/model/candidate_Model.dart';
+import 'package:e_voting_2fa_biometric/features/auth/Data/model/candidate_party_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -13,11 +13,11 @@ class statisticPresident extends StatefulWidget {
 }
 
 class _statisticPresidentState extends State<statisticPresident> {
- bool isLoading = false;
+  bool isLoading = false;
 
   int _currentPage = 1;
   int _pageSize = 10;
-  List<CandidateModel> _data = [];
+  List<CandidatePartyModel> _data = [];
   bool _isLoading = false;
 
   @override
@@ -39,8 +39,8 @@ class _statisticPresidentState extends State<statisticPresident> {
       inspect(jsonData);
       final dataList = jsonData['data'] as List<dynamic>;
 
-      final List<CandidateModel> newData =
-          dataList.map((item) => CandidateModel.fromJson(item)).toList();
+      final List<CandidatePartyModel> newData =
+          dataList.map((item) => CandidatePartyModel.fromJson(item)).toList();
 
       setState(() {
         _data.addAll(newData);
@@ -117,11 +117,36 @@ class _statisticPresidentState extends State<statisticPresident> {
                         _pageSize = value!;
                       });
                     },
+
                     columns: const [
-                      DataColumn(label: Text('Candidate Name')),
-                      DataColumn(label: Text('Image')),
-                      DataColumn(label: Text('Votes')),
-                      DataColumn(label: Text('Party')),
+                      DataColumn(
+                          label: Text('Candidate Name',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: successcolour,
+                              ))),
+                      DataColumn(
+                          label: Text('Image',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: successcolour,
+                              ))),
+                      DataColumn(
+                          label: Text('Votes',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: successcolour,
+                              ))),
+                      DataColumn(
+                          label: Text('Party',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: successcolour,
+                              ))),
                     ],
                     source: _DataSource(data: _data),
                   ),
@@ -133,7 +158,7 @@ class _statisticPresidentState extends State<statisticPresident> {
 }
 
 class _DataSource extends DataTableSource {
-  final List<CandidateModel> data;
+  final List<CandidatePartyModel> data;
 
   _DataSource({required this.data});
 
@@ -147,18 +172,34 @@ class _DataSource extends DataTableSource {
       DataCell(index == 0 &&
               data[index].count !=
                   data[index > 0 ? index - 1 : data.length - 1].count
-          ? Text('${item.fullname.toString()}-Leading',
+          ? Text('${item.fullname}-Leading',
               style: TextStyle(
-                fontSize: 13,
+                fontSize: 17,
                 fontWeight: FontWeight.bold,
                 color: AppColor,
               ))
-          : Text(item.fullname.toString())),
+          : Text(item.fullname.toString(),
+              style: TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+                color: fontcolour2,
+              ))),
       DataCell(CircleAvatar(
         backgroundImage: NetworkImage('${img_url}/${item.image}'),
       )),
-      DataCell(Center(child: Text(item.count.toString()))),
-      DataCell(Text(item.party.toString())),
+      DataCell(Center(
+          child: Text(item.count.toString(),
+              style: TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+                color: fontcolour2,
+              )))),
+      DataCell(Text(item.party.toString(),
+          style: TextStyle(
+            fontSize: 17,
+            fontWeight: FontWeight.bold,
+            color: fontcolour2,
+          ))),
     ]);
   }
 

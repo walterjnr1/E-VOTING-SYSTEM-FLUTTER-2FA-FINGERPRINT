@@ -40,7 +40,7 @@ class CandidateModel {
         party: json["party"],
         status: json["status"],
         election_year: json["election_year"],
-                image: json["image"],
+        image: json["image"],
 
       );
   Map<String, dynamic> toJson() => {
