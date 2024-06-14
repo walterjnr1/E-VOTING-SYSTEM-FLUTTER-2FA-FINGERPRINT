@@ -8,6 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
+
+
 TextEditingController txtfullname_F = TextEditingController();
 TextEditingController txtvoterID_F = TextEditingController();
 TextEditingController txtphone_F = TextEditingController();
@@ -15,7 +17,6 @@ TextEditingController txtemail_F = TextEditingController();
 TextEditingController txtstate_F = TextEditingController();
 TextEditingController txtoccupation_F = TextEditingController();
 TextEditingController txtimg_F = TextEditingController();
-
 
 //Select office dropdownlist
 String cmdoffice = "Select Position";
@@ -28,7 +29,6 @@ List<DropdownMenuItem<String>> get dropdownItems_office {
   ];
   return menuItems;
 }
-
 
 //Select party dropdownlist
 String cmdparty = "Select Party";
@@ -54,15 +54,9 @@ class registerclass {
     var response = await http.post(Uri.parse(url), headers: {
       "Accept": "application/json",
     }, body: {
-      "fullname": txtfullname_F.text,
-      "phone": txtphone_F.text,
-      "email": txtemail_F.text,
-      "occupation": txtoccupation_F.text,
       "voterID": voterid_session,
       "office": cmdoffice,
       "party": cmdparty,
-      "image": txtimg_F.text,
-
     });
 
     var data = jsonDecode(response.body);
