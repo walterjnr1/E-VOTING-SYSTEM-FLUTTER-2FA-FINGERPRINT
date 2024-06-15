@@ -134,7 +134,7 @@ class _statisticGovernorState extends State<statisticGovernor> {
                                 color: successcolour,
                               ))),
                       DataColumn(
-                          label: Text('Votes',
+                          label: Text('Vote(s)',
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,

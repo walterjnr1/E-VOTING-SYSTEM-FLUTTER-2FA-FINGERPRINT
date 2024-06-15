@@ -57,7 +57,7 @@ class _dashboardScreenState extends State<dashboardScreen> {
               bottom: 0,
               left: 0,
               child: Text(
-                '${postUserModel.post?.voterID ?? ""}',
+                'ID: ${postUserModel.post?.voterID ?? ""}',
                 style: GoogleFonts.lato(
                   textStyle: TextStyle(
                     color: AppColor,

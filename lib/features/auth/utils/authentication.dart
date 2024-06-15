@@ -9,7 +9,7 @@ class Authentication {
      static Future<bool> authentication() async {
           try {
             if (!await canAuthenticate()) return false;
-            return await _auth.authenticate(localizedReason: "Access voting module");
+            return await _auth.authenticate(localizedReason: "Verify identity to Access E-voting module");
           } catch (e) {
             print('error $e');
             return false;

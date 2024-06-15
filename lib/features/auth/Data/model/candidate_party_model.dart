@@ -7,9 +7,6 @@ List<CandidatePartyModel> getCandidatePartyModelListFromJson(String str) =>
 class CandidatePartyModel {
   int? id;
   String? fullname;
-  String? phone;
-  String? email;
-  String? occupation;
   String? voterID;
   String? candidateID;
   int? count;
@@ -27,9 +24,6 @@ class CandidatePartyModel {
   CandidatePartyModel(
       {this.id,
       this.fullname,
-      this.phone,
-      this.email,
-      this.occupation,
       this.voterID,
       this.candidateID,
       this.count,
@@ -47,9 +41,6 @@ class CandidatePartyModel {
   CandidatePartyModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     fullname = json['fullname'];
-    phone = json['phone'];
-    email = json['email'];
-    occupation = json['occupation'];
     voterID = json['voterID'];
     candidateID = json['candidateID'];
     count = json['count'];
@@ -69,9 +60,6 @@ class CandidatePartyModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['fullname'] = this.fullname;
-    data['phone'] = this.phone;
-    data['email'] = this.email;
-    data['occupation'] = this.occupation;
     data['voterID'] = this.voterID;
     data['candidateID'] = this.candidateID;
     data['count'] = this.count;

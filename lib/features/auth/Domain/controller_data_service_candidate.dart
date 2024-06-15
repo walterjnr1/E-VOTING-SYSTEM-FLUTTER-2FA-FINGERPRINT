@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
   Future<CandidateModel?> getSinglePostData() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? voterid_session = prefs.getString('voterid_session');
+  String? voterid_session = prefs.getString('voterid_session');
    
   CandidateModel? result;
   try {

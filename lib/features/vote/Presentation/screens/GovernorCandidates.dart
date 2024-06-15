@@ -3,7 +3,6 @@ import 'package:e_voting_2fa_biometric/core/App_constant/constant.dart';
 import 'package:e_voting_2fa_biometric/core/Appbar.dart';
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Data/model/candidate_party_model.dart';
-import 'package:e_voting_2fa_biometric/features/vote/Presentation/screens/voteGovernor.dart';
 import 'package:e_voting_2fa_biometric/features/vote/Presentation/screens/votePresident.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';

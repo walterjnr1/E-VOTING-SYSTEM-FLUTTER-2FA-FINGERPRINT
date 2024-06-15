@@ -52,7 +52,7 @@ class _candidateProfileState extends State<candidateProfile> {
       ),
       body: ListView(
         children: <Widget>[
-          header_Section(context, postCandidateModel,postVoterModel ),
+          header_Section(context, postCandidateModel ),
           body_section(context, postCandidateModel  ),
         ],
       ),

@@ -21,7 +21,7 @@ class _fingerPrintState extends State<fingerPrint> {
           children: <Widget>[
             Flexible(
               child: Text(
-                'Use your Fingerprint to Login to the voting Platform ',
+                'Use your Fingerprint to Login to the E-voting Platform ',
                 style: GoogleFonts.lato(
                   textStyle: TextStyle(color: AppColor, letterSpacing: .5),
                   fontSize: 15,
@@ -56,11 +56,11 @@ class _fingerPrintState extends State<fingerPrint> {
                       Icon(Icons.fingerprint, size: 24.0, color: primaryColor),
                       SizedBox(width: 2.0),
                       Text(
-                        'LOGIN WITH FINGERPRINT ',
+                        'LOGIN WITH FINGERPRINT',
                         style: GoogleFonts.lato(
                           textStyle:
                               TextStyle(color: primaryColor, letterSpacing: .5),
-                          fontSize: 12,
+                          fontSize: 11,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

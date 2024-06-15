@@ -1,7 +1,6 @@
 import 'package:e_voting_2fa_biometric/core/App_constant/constant.dart';
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/provider/data_class_candidate.dart';
-import 'package:e_voting_2fa_biometric/features/auth/Presentation/provider/data_class_voter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -19,13 +18,10 @@ class _candidateProfileWidgetState extends State<candidateProfileWidget> {
     super.initState();
 
     final postCandidateModel =
-        Provider.of<DataClassCandidate>(context, listen: false);
+   Provider.of<DataClassCandidate>(context, listen: false);
     postCandidateModel.getPostData();
 
-    final postVoterModel = Provider.of<DataClassVoter>(context, listen: false);
-    postVoterModel.getPostData();
-
-    Future.delayed(Duration(seconds: 2), () {
+     Future.delayed(Duration(seconds: 2), () {
       setState(() {});
     });
   }
@@ -37,7 +33,7 @@ class _candidateProfileWidgetState extends State<candidateProfileWidget> {
 }
 
 Widget header_Section(BuildContext context,
-    DataClassCandidate postCandidateModel, DataClassVoter postVoterModel) {
+    DataClassCandidate postCandidateModel) {
   return Container(
     height: 160,
     decoration: BoxDecoration(
@@ -57,7 +53,7 @@ Widget header_Section(BuildContext context,
           children: <Widget>[
             CircleAvatar(
               backgroundImage: NetworkImage(
-                  '${img_url}/${postVoterModel.post?.image ?? ""}'),
+                  '${img_url}/${postCandidateModel.post?.image ?? ""}'),
               //NetworkImage(
               //'https://media.istockphoto.com/id/1460124878/photo/social-media-connection-and-woman-typing-on-a-phone-for-communication-app-and-chat-web-search.webp?b=1&s=170667a&w=0&k=20&c=2jxUr_WTdJyMUD0OcnXD1Fdbb63f8TDkTvpcPsA7aHI='),
               minRadius: 50,
@@ -69,7 +65,7 @@ Widget header_Section(BuildContext context,
           height: 6,
         ),
         Text(
-          '${postCandidateModel.post?.fullname ?? ""}',
+          '${postCandidateModel.post?.candidateName ?? ""}',
           style: GoogleFonts.lato(
             textStyle: TextStyle(color: primaryColor, letterSpacing: .5),
             fontSize: 20,
@@ -194,7 +190,7 @@ Widget body_section(
               ),
             ),
             subtitle: Text(
-              '${postCandidateModel.post?.status == "1" ? "Active" : "Inactive"}',
+              '${postCandidateModel.post?.status == '1' ? "Active" : "Inactive"}',
               style: GoogleFonts.lato(
                 textStyle: TextStyle(color: successcolour, letterSpacing: .5),
                 fontSize: 17,
