@@ -1,7 +1,10 @@
 import 'package:e_voting_2fa_biometric/core/Appbar.dart';
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
+import 'package:e_voting_2fa_biometric/core/services/error_internet_connection.dart';
+import 'package:e_voting_2fa_biometric/core/services/internet_connection.dart';
 import 'package:e_voting_2fa_biometric/features/vote/Presentation/widgets/selectelection.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class selectElection extends StatefulWidget {
   @override
@@ -11,6 +14,18 @@ class selectElection extends StatefulWidget {
 class _selectElectionState extends State<selectElection> {
   @override
   Widget build(BuildContext context) {
+     final internetConnectionProvider =
+        Provider.of<InternetConnectionProvider>(context);
+
+    if (!internetConnectionProvider.hasInternet) {
+      // If there's no internet connection, push to a new route
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => NoInternetScreen()),
+        );
+      });
+    }
     return Scaffold(
       appBar: BaseAppBar(
         title: Text(

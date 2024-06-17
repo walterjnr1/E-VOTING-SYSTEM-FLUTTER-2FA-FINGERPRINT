@@ -2,10 +2,14 @@ import 'dart:developer';
 import 'package:e_voting_2fa_biometric/core/App_constant/constant.dart';
 import 'package:e_voting_2fa_biometric/core/Appbar.dart';
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
+import 'package:e_voting_2fa_biometric/core/services/error_internet_connection.dart';
+import 'package:e_voting_2fa_biometric/core/services/internet_connection.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Data/model/candidate_party_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:provider/provider.dart';
 
 class statisticGovernor extends StatefulWidget {
   @override
@@ -78,6 +82,18 @@ class _statisticGovernorState extends State<statisticGovernor> {
 
   @override
   Widget build(BuildContext context) {
+     final internetConnectionProvider =
+        Provider.of<InternetConnectionProvider>(context);
+
+    if (!internetConnectionProvider.hasInternet) {
+      // If there's no internet connection, push to a new route
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => NoInternetScreen()),
+        );
+      });
+    }
     return Scaffold(
       appBar: BaseAppBar(
         title: Text(

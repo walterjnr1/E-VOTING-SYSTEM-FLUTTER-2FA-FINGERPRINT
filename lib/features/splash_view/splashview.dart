@@ -44,7 +44,7 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
 
   Future<void> _checkLoginStatus() async {
     final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('voterid_session');
+    final token = prefs.getString('otp_session');
     if (token != null) {
       setState(() {
         _isLoggedIn = true;
@@ -66,50 +66,54 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
     return Scaffold(
       backgroundColor: AppColor,
       body: Center(
-        child: AnimatedBuilder(
-          animation: _animation,
-          builder: (context, child) {
-            return Transform.scale(
-              scale: _animation.value,
-              child: child,
-            );
-          },
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/images/logo.png',
-                width: 150,
-              ),
-              const SizedBox(
-                height: 222,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Deploying a Secured Mobile-based E-voting System using 2FA security',
-                  style: GoogleFonts.roboto(
-                    textStyle: TextStyle(color: primaryColor, letterSpacing: .5),
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+        child: SizedBox(
+          child: AnimatedBuilder(
+            animation: _animation,
+            builder: (context, child) {
+              return Transform.scale(
+                scale: _animation.value,
+                child: child,
+              );
+            },
+            child: SizedBox(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/logo.png',
+                    width: 150,
                   ),
-                ),
-              ),
-              SizedBox(
-                height: 22,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Developed by: NGOMESIEGH BORIS MBIZIWUEH, UBa23EP221',
-                  style: GoogleFonts.roboto(
-                    textStyle: TextStyle(color: primaryColor, letterSpacing: .5),
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                  const SizedBox(
+                    height: 222,
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Deploying a Secured Mobile-based E-voting System using 2FA security',
+                      style: GoogleFonts.roboto(
+                        textStyle: TextStyle(color: primaryColor, letterSpacing: .5),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 22,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Developed by: NGOMESIEGH BORIS MBIZIWUEH, UBa23EP221',
+                      style: GoogleFonts.roboto(
+                        textStyle: TextStyle(color: primaryColor, letterSpacing: .5),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

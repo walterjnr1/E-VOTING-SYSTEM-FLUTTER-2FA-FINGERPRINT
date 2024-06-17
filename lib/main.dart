@@ -1,8 +1,8 @@
+import 'package:e_voting_2fa_biometric/core/services/internet_connection.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/provider/data_class_candidate.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/provider/data_class_voter.dart';
-import 'package:e_voting_2fa_biometric/features/dashboard/Presentation/screens/dashboard_bottombar.dart';
-import 'package:e_voting_2fa_biometric/features/vote/Presentation/screens/GovernorCandidates.dart';
-import 'package:e_voting_2fa_biometric/features/vote/Presentation/screens/selectelection.dart';
+import 'package:e_voting_2fa_biometric/features/auth/Presentation/screens/login.dart';
+import 'package:e_voting_2fa_biometric/features/splash_view/splashview.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,11 +12,11 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (context) => DataClassVoter()),
         ChangeNotifierProvider(create: (context) => DataClassCandidate()),
-
-      ],
-      child: MyApp(),
-    ),
-  );
+        ChangeNotifierProvider(create: (context) => InternetConnectionProvider()),
+                 ],
+        child: MyApp(),
+        ),
+        );
   
 }
 
@@ -29,8 +29,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => BottomMenu(),
-       //'/': (context) => selectElection(),
+        '/': (context) => SplashView(),
+       //'/': (context) => voterlogin(),
 
       },
     );

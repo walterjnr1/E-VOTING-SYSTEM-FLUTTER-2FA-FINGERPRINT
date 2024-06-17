@@ -9,7 +9,11 @@ class login_otpWidget extends StatefulWidget {
 }
 
 class _login_otpWidgetState extends State<login_otpWidget> {
-
+@override
+  void dispose() {
+    txtotp_F.dispose(); // Dispose the controller
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold();

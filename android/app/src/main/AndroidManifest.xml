@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <application
-        android:label="e_voting_2fa_biometric"
+        android:label="E-Voting System Using 2FA and FingerPrint"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

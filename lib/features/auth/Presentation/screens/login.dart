@@ -1,8 +1,11 @@
 import 'package:e_voting_2fa_biometric/core/Appbar.dart';
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
+import 'package:e_voting_2fa_biometric/core/services/error_internet_connection.dart';
+import 'package:e_voting_2fa_biometric/core/services/internet_connection.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Domain/controllerLogin.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/widgets/login.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class voterlogin extends StatefulWidget {
   @override
@@ -14,6 +17,18 @@ class _voterloginState extends State<voterlogin> {
 
   @override
   Widget build(BuildContext context) {
+  final internetConnectionProvider =
+        Provider.of<InternetConnectionProvider>(context);
+
+    if (!internetConnectionProvider.hasInternet) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => NoInternetScreen()),
+        );
+      });
+    }
+        
     return Scaffold(
       appBar: BaseAppBar(
         title: Text(
@@ -49,6 +64,7 @@ class _voterloginState extends State<voterlogin> {
             )
           ],
         ),
+        
       ),
     );
   }

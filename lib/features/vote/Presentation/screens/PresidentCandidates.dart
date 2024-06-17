@@ -2,12 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_voting_2fa_biometric/core/App_constant/constant.dart';
 import 'package:e_voting_2fa_biometric/core/Appbar.dart';
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
+import 'package:e_voting_2fa_biometric/core/services/error_internet_connection.dart';
+import 'package:e_voting_2fa_biometric/core/services/internet_connection.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Data/model/candidate_party_model.dart';
 import 'package:e_voting_2fa_biometric/features/vote/Presentation/screens/votePresident.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PresidentCandidates extends StatefulWidget {
@@ -43,6 +46,18 @@ class _PresidentCandidatesState extends State<PresidentCandidates> {
 
   @override
   Widget build(BuildContext context) {
+     final internetConnectionProvider =
+        Provider.of<InternetConnectionProvider>(context);
+
+    if (!internetConnectionProvider.hasInternet) {
+      // If there's no internet connection, push to a new route
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => NoInternetScreen()),
+        );
+      });
+    }
     return Scaffold(
       appBar: BaseAppBar(
         title: Text(

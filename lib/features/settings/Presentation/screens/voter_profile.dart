@@ -1,5 +1,7 @@
 import 'package:e_voting_2fa_biometric/core/Appbar.dart';
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
+import 'package:e_voting_2fa_biometric/core/services/error_internet_connection.dart';
+import 'package:e_voting_2fa_biometric/core/services/internet_connection.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/provider/data_class_voter.dart';
 import 'package:e_voting_2fa_biometric/features/settings/Presentation/widgets/voter_profile.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +31,18 @@ class _voterProfileState extends State<voterProfile> {
   @override
   Widget build(BuildContext context) {
     final postUserModel = Provider.of<DataClassVoter>(context);
+ final internetConnectionProvider =
+        Provider.of<InternetConnectionProvider>(context);
 
+    if (!internetConnectionProvider.hasInternet) {
+      // If there's no internet connection, push to a new route
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => NoInternetScreen()),
+        );
+      });
+    }
     return Scaffold(
       appBar: BaseAppBar(
         title: Text(

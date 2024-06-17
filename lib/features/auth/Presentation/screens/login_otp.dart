@@ -1,9 +1,12 @@
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
+import 'package:e_voting_2fa_biometric/core/services/error_internet_connection.dart';
+import 'package:e_voting_2fa_biometric/core/services/internet_connection.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/widgets/login_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Domain/controller_login_OTP.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:provider/provider.dart';
 
 class login_otp extends StatefulWidget {
   @override
@@ -15,6 +18,18 @@ class _login_otpState extends State<login_otp> {
 
   @override
   Widget build(BuildContext context) {
+     final internetConnectionProvider =
+        Provider.of<InternetConnectionProvider>(context);
+
+    if (!internetConnectionProvider.hasInternet) {
+      // If there's no internet connection, push to a new route
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => NoInternetScreen()),
+        );
+      });
+    }
     return Scaffold(
       body: Center(
         child: ListView(

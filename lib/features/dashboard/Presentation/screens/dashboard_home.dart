@@ -1,4 +1,6 @@
 import 'package:e_voting_2fa_biometric/core/App_constant/constant.dart';
+import 'package:e_voting_2fa_biometric/core/services/error_internet_connection.dart';
+import 'package:e_voting_2fa_biometric/core/services/internet_connection.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/provider/data_class_voter.dart';
 import 'package:e_voting_2fa_biometric/features/dashboard/Presentation/widgets/dashboard_home.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +38,18 @@ class _dashboardScreenState extends State<dashboardScreen> {
   @override
   Widget build(BuildContext context) {
     final postUserModel = Provider.of<DataClassVoter>(context);
+ final internetConnectionProvider =
+        Provider.of<InternetConnectionProvider>(context);
 
+    if (!internetConnectionProvider.hasInternet) {
+      // If there's no internet connection, push to a new route
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => NoInternetScreen()),
+        );
+      });
+    }
     return Scaffold(
       appBar: AppBar(
         title: Stack(

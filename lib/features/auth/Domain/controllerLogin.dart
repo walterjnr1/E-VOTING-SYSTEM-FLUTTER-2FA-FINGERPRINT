@@ -28,7 +28,6 @@ print(message);
   
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString('voterid_session', txtvoterid_F.text);
-        String? voterid_session = prefs.getString('voterid_session');
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => login_otp()));
       } else {

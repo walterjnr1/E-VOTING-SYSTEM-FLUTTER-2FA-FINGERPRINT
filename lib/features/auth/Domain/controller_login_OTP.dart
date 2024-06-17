@@ -12,6 +12,7 @@ TextEditingController txtotp_F = TextEditingController();
 
 class validateLoginOTPclass {
   static Future<void> login_otp(BuildContext context) async {
+    
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? voterid_session = prefs.getString('voterid_session');
 
@@ -28,7 +29,11 @@ class validateLoginOTPclass {
    var data = jsonDecode(response.body);
     var message = data["message"];
     print(message);
+
     if (response.statusCode == 201) {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+        //String? voterid_session = prefs.getString('voterid_session');
+    prefs.setString('otp_session', voterid_session!);
 
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => BottomMenu()));
