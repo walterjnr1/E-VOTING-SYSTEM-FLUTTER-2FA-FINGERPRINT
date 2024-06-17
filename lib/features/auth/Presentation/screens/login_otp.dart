@@ -7,6 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Domain/controller_login_OTP.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class login_otp extends StatefulWidget {
   @override
@@ -18,15 +20,21 @@ class _login_otpState extends State<login_otp> {
 
   @override
   Widget build(BuildContext context) {
-     final internetConnectionProvider =
+    final internetConnectionProvider =
         Provider.of<InternetConnectionProvider>(context);
 
     if (!internetConnectionProvider.hasInternet) {
       // If there's no internet connection, push to a new route
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => NoInternetScreen()),
+        //Navigator.pushReplacement(
+        //  context,
+        //  MaterialPageRoute(builder: (context) => NoInternetScreen()),
+        // );
+        showTopSnackBar(
+          Overlay.of(context),
+          CustomSnackBar.error(
+            message: 'No internet Connection. Try Again',
+          ),
         );
       });
     }

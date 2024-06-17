@@ -37,13 +37,13 @@ class NoInternetScreen extends StatelessWidget {
                 child: Text('Retry',
                     style: TextStyle(fontSize: 15, color: fontcolour2)),
                 onPressed: () {
-                 // if (!internetConnectionProvider.hasInternet) {
+                  if (internetConnectionProvider.hasInternet) {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (context) => BottomMenu()),
                     );
                   }
-                //},
+                },
               ),
             ],
           ),

@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Domain/controller_register_OTP.dart';
 import 'package:provider/provider.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class register_otp extends StatefulWidget {
   @override
@@ -24,9 +26,11 @@ class _register_otpState extends State<register_otp> {
     if (!internetConnectionProvider.hasInternet) {
       // If there's no internet connection, push to a new route
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => NoInternetScreen()),
+        showTopSnackBar(
+          Overlay.of(context),
+          CustomSnackBar.error(
+            message: 'No internet Connection. Try Again',
+          ),
         );
       });
     }
