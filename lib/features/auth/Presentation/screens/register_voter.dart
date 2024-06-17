@@ -208,7 +208,7 @@ class _voterregisterState extends State<voterregister> {
                 isLoading = true;
 
                 registerVoter1.registerVoter(context, pickedimage!);
-                isLoading = false;
+                isLoading = true;
               });
             });
           },

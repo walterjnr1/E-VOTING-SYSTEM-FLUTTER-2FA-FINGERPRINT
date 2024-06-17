@@ -161,7 +161,7 @@ class _candidateregisterState extends State<candidateregister> {
                 isLoading = true;
 
                 registerclass.register(context);
-                isLoading = false;
+                isLoading = true;
               });
             });
           },

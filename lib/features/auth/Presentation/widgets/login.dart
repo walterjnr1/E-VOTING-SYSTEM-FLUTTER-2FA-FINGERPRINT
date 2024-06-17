@@ -11,11 +11,12 @@ class voterloginWidget extends StatefulWidget {
 
 class _voterloginWidgetState extends State<voterloginWidget> {
   bool isLoading = false;
-@override
+  @override
   void dispose() {
     txtvoterid_F.dispose(); // Dispose the controller
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,7 +35,7 @@ class _voterloginWidgetState extends State<voterloginWidget> {
               setState(() {
                 isLoading = true;
                 loginclass.login(context);
-                isLoading = false;
+                isLoading = true;
               });
             });
           },

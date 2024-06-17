@@ -76,7 +76,7 @@ class _register_otpState extends State<register_otp> {
               setState(() {
                 isLoading = true;
                 validateRegistrationOTPclass.otp(context);
-                isLoading = false;
+                isLoading = true;
               });
             });
           },
