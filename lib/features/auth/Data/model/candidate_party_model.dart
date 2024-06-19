@@ -9,6 +9,7 @@ class CandidatePartyModel {
   String? fullname;
   String? voterID;
   String? candidateID;
+  String? candidateName;
   int? count;
   String? office;
   String? party;
@@ -26,6 +27,7 @@ class CandidatePartyModel {
       this.fullname,
       this.voterID,
       this.candidateID,
+      this.candidateName,
       this.count,
       this.office,
       this.party,
@@ -43,6 +45,7 @@ class CandidatePartyModel {
     fullname = json['fullname'];
     voterID = json['voterID'];
     candidateID = json['candidateID'];
+    candidateName = json['candidateName'];
     count = json['count'];
     office = json['office'];
     party = json['party'];
@@ -62,6 +65,7 @@ class CandidatePartyModel {
     data['fullname'] = this.fullname;
     data['voterID'] = this.voterID;
     data['candidateID'] = this.candidateID;
+    data['candidateName'] = this.candidateName;
     data['count'] = this.count;
     data['office'] = this.office;
     data['party'] = this.party;

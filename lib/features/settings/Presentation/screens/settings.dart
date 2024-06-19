@@ -1,5 +1,4 @@
 import 'package:e_voting_2fa_biometric/core/Appbar.dart';
-import 'package:e_voting_2fa_biometric/core/services/error_internet_connection.dart';
 import 'package:e_voting_2fa_biometric/core/services/internet_connection.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,12 +22,18 @@ class _settingsState extends State<settings> {
         Provider.of<InternetConnectionProvider>(context);
 
     if (!internetConnectionProvider.hasInternet) {
-      // If there's no internet connection, push to a new route
       WidgetsBinding.instance.addPostFrameCallback((_) {
-       showTopSnackBar(
-          Overlay.of(context),
-          CustomSnackBar.error(
-            message: 'No internet Connection. Try Again',
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: errorcolour, // Add red background
+            content: Text(
+              'No Internet Connection Available.....',
+              style: TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+                color: primaryColor,
+              ),
+            ),
           ),
         );
       });

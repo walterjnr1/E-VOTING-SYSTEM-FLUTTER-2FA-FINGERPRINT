@@ -1,6 +1,5 @@
 import 'package:e_voting_2fa_biometric/core/Appbar.dart';
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
-import 'package:e_voting_2fa_biometric/core/services/error_internet_connection.dart';
 import 'package:e_voting_2fa_biometric/core/services/internet_connection.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/provider/data_class_candidate.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/provider/data_class_voter.dart';
@@ -24,7 +23,6 @@ class _candidateProfileState extends State<candidateProfile> {
     final postCandidateModel = Provider.of<DataClassCandidate>(context, listen: false);
     postCandidateModel.getPostData();
 
-
     final postVoterModel = Provider.of<DataClassVoter>(context, listen: false);
     postVoterModel.getPostData();
 
@@ -41,13 +39,19 @@ class _candidateProfileState extends State<candidateProfile> {
  final internetConnectionProvider =
         Provider.of<InternetConnectionProvider>(context);
 
-    if (!internetConnectionProvider.hasInternet) {
-      // If there's no internet connection, push to a new route
+   if (!internetConnectionProvider.hasInternet) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-       showTopSnackBar(
-          Overlay.of(context),
-          CustomSnackBar.error(
-            message: 'No internet Connection. Try Again',
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: errorcolour, // Add red background
+            content: Text(
+              'No Internet Connection Available.....',
+              style: TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+                color: primaryColor,
+              ),
+            ),
           ),
         );
       });

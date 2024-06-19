@@ -1,5 +1,4 @@
 import 'package:e_voting_2fa_biometric/core/App_constant/constant.dart';
-import 'package:e_voting_2fa_biometric/core/services/error_internet_connection.dart';
 import 'package:e_voting_2fa_biometric/core/services/internet_connection.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/provider/data_class_voter.dart';
 import 'package:e_voting_2fa_biometric/features/dashboard/Presentation/widgets/dashboard_home.dart';
@@ -44,12 +43,18 @@ class _dashboardScreenState extends State<dashboardScreen> {
         Provider.of<InternetConnectionProvider>(context);
 
     if (!internetConnectionProvider.hasInternet) {
-      // If there's no internet connection, push to a new route
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        showTopSnackBar(
-          Overlay.of(context),
-          CustomSnackBar.error(
-            message: 'No internet Connection. Try Again',
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: errorcolour, // Add red background
+            content: Text(
+              'No Internet Connection Available.....',
+              style: TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+                color: primaryColor,
+              ),
+            ),
           ),
         );
       });
