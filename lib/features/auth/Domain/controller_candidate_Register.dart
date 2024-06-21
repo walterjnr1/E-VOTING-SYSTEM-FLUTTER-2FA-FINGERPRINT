@@ -36,9 +36,18 @@ String cmdparty = "Select Party";
 List<DropdownMenuItem<String>> get dropdownItems_party {
   List<DropdownMenuItem<String>> menuItems = [
     const DropdownMenuItem(child: Text("Select Party"), value: "Select Party"),
-    const DropdownMenuItem(child: Text("Alliance Democratic Party (ADC)"), value: "Alliance Democratic Party (ADC)"),
-    const DropdownMenuItem(child: Text("Labour Party (LP)"), value: "Labour Party (LP)"),
-    const DropdownMenuItem(child: Text("Accord Party (A)"), value: "Accord Party (A)"),
+const DropdownMenuItem(
+  child: Text("Cameroon People's Democratic Movement(CPDM)",overflow: TextOverflow.ellipsis
+  ), value: "Cameroon People's Democratic Movement(CPDM)"),
+    const DropdownMenuItem(child: Text("Social Democratic Front(SDF)"), value: "Social Democratic Front(SDF)"),
+    const DropdownMenuItem(child: Text("Cameroon Renaissance Movement(MRC)"), value: "Cameroon Renaissance Movement(MRC)"),
+    const DropdownMenuItem(child: Text("Cameroon people's party"), value: "Cameroon people's party"),
+    const DropdownMenuItem(child: Text("Cameroonian Party for National Reconciliation(PCRN)"), value: "Cameroonian Party for National Reconciliation(PCRN)"),
+    const DropdownMenuItem(child: Text("Cameroon Democratic Union (CDU)"), value: "Cameroon Democratic Union (CDU)"),
+    const DropdownMenuItem(child: Text("Cameroon National Salvation Front (CNSF)"), value: "Cameroon National Salvation Front (CNSF)"),
+    const DropdownMenuItem(child: Text("National Union for Democracy and Progress(UNDP)"), value: "National Union for Democracy and Progress(UNDP)"),
+    const DropdownMenuItem(child: Text("Movement for the Defence of the Republic (MDR)"), value: "Movement for the Defence of the Republic (MDR)"),
+      const DropdownMenuItem(child: Text("Union of Socialist Movements (USM)"), value: "Union of Socialist Movements (USM)"),
 
   ];
   return menuItems;

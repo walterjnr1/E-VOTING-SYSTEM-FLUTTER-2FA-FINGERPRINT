@@ -1,7 +1,10 @@
 import 'package:e_voting_2fa_biometric/core/services/internet_connection.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/provider/data_class_candidate.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/provider/data_class_voter.dart';
+import 'package:e_voting_2fa_biometric/features/auth/Presentation/screens/fingerprint.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/screens/login.dart';
+import 'package:e_voting_2fa_biometric/features/auth/Presentation/screens/register_candidate.dart';
+import 'package:e_voting_2fa_biometric/features/dashboard/Presentation/screens/dashboard_bottombar.dart';
 import 'package:e_voting_2fa_biometric/features/splash_view/splashview.dart';
 import 'package:e_voting_2fa_biometric/features/vote/Presentation/screens/GovernorCandidates.dart';
 import 'package:e_voting_2fa_biometric/features/vote/Presentation/screens/PresidentCandidates.dart';
@@ -31,8 +34,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        //'/': (context) => SplashView(),
-       '/': (context) => GovernorCandidates(),
+       // '/': (context) => SplashView(),
+       '/': (context) => BottomMenu(),
 
       },
     );

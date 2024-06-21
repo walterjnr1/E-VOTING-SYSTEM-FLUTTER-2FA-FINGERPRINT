@@ -80,7 +80,9 @@ class VoteClass {
         ),
       );
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => selectElection()));
+          context, MaterialPageRoute(builder: (context) => selectElection()
+          )
+          );
     }
   }
 }

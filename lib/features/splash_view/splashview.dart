@@ -51,7 +51,7 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
       });
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => SplashView()),
+        MaterialPageRoute(builder: (context) => BottomMenu()),
       );
     } else {
       Navigator.pushReplacement(

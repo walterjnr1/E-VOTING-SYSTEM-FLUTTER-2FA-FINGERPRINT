@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class VoteGovernor extends StatefulWidget {
   @override
@@ -125,9 +123,7 @@ class _VoteGovernorState extends State<VoteGovernor> {
                     height: 56,
                     child: TextButton(
                       onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
+                        showDialog(context: context, builder: (dialogGovernorContext) {
                             return AlertDialog(
                               title: Align(
                                   alignment: Alignment.center,

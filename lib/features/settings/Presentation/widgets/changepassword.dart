@@ -132,7 +132,7 @@ Widget button(BuildContext context) {
                 //fontStyle: FontStyle.italic,
               )),
           style: ElevatedButton.styleFrom(
-            backgroundColor: buttoncolour,
+            backgroundColor: AppColor,
           ),
           onPressed: () => null,
         )),

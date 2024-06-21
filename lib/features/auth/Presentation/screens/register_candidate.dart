@@ -7,8 +7,6 @@ import 'package:e_voting_2fa_biometric/features/auth/Presentation/widgets/regist
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class candidateregister extends StatefulWidget {
   @override
@@ -17,6 +15,7 @@ class candidateregister extends StatefulWidget {
 
 class _candidateregisterState extends State<candidateregister> {
   bool isLoading = false;
+  
   @override
   void initState() {
     super.initState();
@@ -37,10 +36,10 @@ class _candidateregisterState extends State<candidateregister> {
   @override
   Widget build(BuildContext context) {
     final postUserModel = Provider.of<DataClassVoter>(context);
- final internetConnectionProvider =
+    final internetConnectionProvider =
         Provider.of<InternetConnectionProvider>(context);
 
-   if (!internetConnectionProvider.hasInternet) {
+    if (!internetConnectionProvider.hasInternet) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -73,12 +72,11 @@ class _candidateregisterState extends State<candidateregister> {
       body: Center(
         child: ListView(
           shrinkWrap: true,
-          padding: EdgeInsets.only(left: 24.0, right: 24.0),
+          padding: EdgeInsets.only(left: 12.0, right: 12.0),
           children: <Widget>[
             SizedBox(height: 3.0),
-
             header_img(context, postUserModel),
-             img_path(context, postUserModel),
+            img_path(context, postUserModel),
             SizedBox(height: 12.0),
             fullname(context, postUserModel),
             SizedBox(height: 12.0),
@@ -97,8 +95,6 @@ class _candidateregisterState extends State<candidateregister> {
             officedropdownwidget(),
             SizedBox(height: 12.0),
             registerbutton(context),
-
-            
             SizedBox(height: 12.0),
           ],
         ),
@@ -107,46 +103,49 @@ class _candidateregisterState extends State<candidateregister> {
   }
 
   DropdownButtonFormField<String> officedropdownwidget() {
-    return DropdownButtonFormField(
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: fontcolour2, width: 2.0),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: fontcolour2, width: 2.0),
-          ),
+  return DropdownButtonFormField(
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: fontcolour2, width: 2.0),
         ),
-        dropdownColor: primaryColor,
-        value: cmdoffice,
-        onChanged: (String? newValue) {
-          setState(() {
-            cmdoffice = newValue!;
-          });
-        },
-        items: dropdownItems_office);
-  }
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: fontcolour2, width: 2.0),
+        ),
+      ),
+      dropdownColor: primaryColor,
+      value: cmdoffice,
+      isExpanded: true, // Add this line
+      onChanged: (String? newValue) {
+        setState(() {
+          cmdoffice = newValue!;
+        });
+      },
+      items: dropdownItems_office);
+}
 
-  DropdownButtonFormField<String> partydropdownwidget() {
-    return DropdownButtonFormField(
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: fontcolour2, width: 2.0),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: fontcolour2, width: 2.0),
-          ),
+DropdownButtonFormField<String> partydropdownwidget() {
+  return DropdownButtonFormField(
+      decoration: InputDecoration(
+        contentPadding:
+            EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: fontcolour2, width: 2.0),
         ),
-        dropdownColor: primaryColor,
-        value: cmdparty,
-        onChanged: (String? newValue) {
-          setState(() {
-            cmdparty = newValue!;
-          });
-        },
-        items: dropdownItems_party);
-  }
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: fontcolour2, width: 2.0),
+        ),
+      ),
+      dropdownColor: primaryColor,
+      value: cmdparty,
+      isExpanded: true, // Add this line
+      onChanged: (String? newValue) {
+        setState(() {
+          cmdparty = newValue!;
+        });
+      },
+      items: dropdownItems_party);
+}
 
   Widget registerbutton(BuildContext context) {
     return Container(
@@ -204,8 +203,4 @@ class _candidateregisterState extends State<candidateregister> {
                       )),
         ));
   }
-
-
-
-  
 }
