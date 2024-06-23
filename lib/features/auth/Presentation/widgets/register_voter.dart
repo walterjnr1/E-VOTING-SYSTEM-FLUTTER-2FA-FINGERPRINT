@@ -67,7 +67,7 @@ Widget Dateofbirth_textfield(
           context: context,
           initialDate: dateTime,
           initialDatePickerMode: DatePickerMode.day,
-          firstDate: DateTime.now(),
+          firstDate: DateTime(1920),
           lastDate: DateTime(2101));
       if (picked != null) {
         dateTime = picked;
@@ -181,7 +181,7 @@ Widget lga_textfield(BuildContext context, TextEditingController txtlga_F) {
     controller: txtlga_F,
     //initialValue: '${postUserModel.post?.phone ?? ""}',
     decoration: InputDecoration(
-      labelText: 'LGA',
+      labelText: 'LGA/MUNICIPALITY',
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(color: fontcolour2, width: 2.0),
       ),

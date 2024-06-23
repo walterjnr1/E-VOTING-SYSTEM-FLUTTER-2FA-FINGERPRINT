@@ -153,54 +153,46 @@ DropdownButtonFormField<String> partydropdownwidget() {
         width: MediaQuery.of(context).size.width,
         height: 60,
         child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              backgroundColor: AppColor, shape: const StadiumBorder()),
-          onPressed: () {
+        style: ElevatedButton.styleFrom(
+            backgroundColor: AppColor, shape: const StadiumBorder()),
+        onPressed: () async {
+          setState(() {
+            isLoading = true;
+          });
+
+          try {
+            await  registerclass.register(context);
+
+          } finally {
             setState(() {
-              isLoading = true;
+              isLoading = false;
             });
-
-            Future.delayed(const Duration(seconds: 5), () {
-              setState(() {
-                isLoading = true;
-
-                registerclass.register(context);
-                isLoading = true;
-              });
-            });
-          },
-          child: isLoading
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Loading...',
-                      style: GoogleFonts.lato(
-                          textStyle:
-                              TextStyle(color: primaryColor, letterSpacing: .5),
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          height: 3.0
-                          //fontStyle: FontStyle.italic,
-                          ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    CircularProgressIndicator(
-                      color: primaryColor,
-                    ),
-                  ],
-                )
-              : Text('Register',
-                  style: GoogleFonts.lato(
-                      textStyle:
-                          TextStyle(color: primaryColor, letterSpacing: .5),
+          }
+        },
+        child: isLoading
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Loading...',
+                    style: GoogleFonts.lato(
                       fontSize: 19,
                       fontWeight: FontWeight.bold,
-                      height: 3.0
-                      //fontStyle: FontStyle.italic,
-                      )),
-        ));
+                      color: primaryColor,
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  CircularProgressIndicator(
+                    color: primaryColor,
+                  ),
+                ],
+              )
+            : Text('Register',
+                style: GoogleFonts.lato(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: primaryColor,
+                )),
+      ));
   }
 }

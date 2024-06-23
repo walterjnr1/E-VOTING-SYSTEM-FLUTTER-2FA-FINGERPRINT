@@ -7,8 +7,6 @@ import 'package:e_voting_2fa_biometric/features/settings/Presentation/widgets/ca
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class candidateProfile extends StatefulWidget {
   @override

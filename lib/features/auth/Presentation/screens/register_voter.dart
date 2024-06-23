@@ -2,15 +2,13 @@ import 'dart:io';
 import 'package:e_voting_2fa_biometric/core/Appbar.dart';
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
 import 'package:e_voting_2fa_biometric/core/services/internet_connection.dart';
-import 'package:e_voting_2fa_biometric/features/auth/Domain/controller_voter_Register.dart';
+import 'package:e_voting_2fa_biometric/features/auth/Domain/controller_Voter_Register.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/widgets/register_voter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class voterregister extends StatefulWidget {
   @override
@@ -37,7 +35,7 @@ class _voterregisterState extends State<voterregister> {
 
   @override
   Widget build(BuildContext context) {
-     final internetConnectionProvider =
+    final internetConnectionProvider =
         Provider.of<InternetConnectionProvider>(context);
 
     if (!internetConnectionProvider.hasInternet) {
@@ -94,9 +92,11 @@ class _voterregisterState extends State<voterregister> {
             SizedBox(height: 5.0),
             occupation_textfield(context, txtoccupation_F),
             SizedBox(height: 5.0),
+            statedropdownwidget(),
+            SizedBox(height: 5.0),
             lga_textfield(context, txtlga_F),
             SizedBox(height: 5.0),
-            statedropdownwidget(),
+            qualificationdropdownwidget(),
             SizedBox(height: 5.0),
             registerbutton(context),
             SizedBox(height: 2.0),
@@ -174,7 +174,27 @@ class _voterregisterState extends State<voterregister> {
         items: dropdownItems_maritalstatus);
   }
 
-  DropdownButtonFormField<String> statedropdownwidget() {
+  DropdownButtonFormField<String> qualificationdropdownwidget() {
+    return DropdownButtonFormField(
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: fontcolour2, width: 2.0),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: fontcolour2, width: 2.0),
+          ),
+        ),
+        dropdownColor: primaryColor,
+        value: cmdqualification,
+        onChanged: (String? newValue) {
+          setState(() {
+            cmdqualification = newValue!;
+          });
+        },
+        items: dropdownItems_qualification);
+  }
+DropdownButtonFormField<String> statedropdownwidget() {
     return DropdownButtonFormField(
         decoration: InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -194,61 +214,51 @@ class _voterregisterState extends State<voterregister> {
         },
         items: dropdownItems_State);
   }
-
   Widget registerbutton(BuildContext context) {
     return Container(
         padding: const EdgeInsets.only(left: 10, right: 10),
         width: MediaQuery.of(context).size.width,
         height: 60,
         child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              backgroundColor: AppColor, shape: const StadiumBorder()),
-          onPressed: () {
+        style: ElevatedButton.styleFrom(
+            backgroundColor: AppColor, shape: const StadiumBorder()),
+        onPressed: () async {
+          setState(() {
+            isLoading = true;
+          });
+
+          try {
+            await Voter.registerVoter(context, pickedimage!);
+          } finally {
             setState(() {
-              isLoading = true;
+              isLoading = false;
             });
-
-            Future.delayed(const Duration(seconds: 5), () {
-              setState(() {
-                isLoading = true;
-
-                registerVoter1.registerVoter(context, pickedimage!);
-                isLoading = true;
-              });
-            });
-          },
-          child: isLoading
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Loading...',
-                      style: GoogleFonts.lato(
-                          textStyle:
-                              TextStyle(color: primaryColor, letterSpacing: .5),
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          height: 3.0
-                          //fontStyle: FontStyle.italic,
-                          ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    CircularProgressIndicator(
+          }
+        },
+        child: isLoading
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Loading...',
+                    style: GoogleFonts.lato(
+                      fontSize: 19,
+                      fontWeight: FontWeight.bold,
                       color: primaryColor,
                     ),
-                  ],
-                )
-              : Text('Register',
-                  style: GoogleFonts.lato(
-                      textStyle:
-                          TextStyle(color: primaryColor, letterSpacing: .5),
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                      height: 3.0
-                      //fontStyle: FontStyle.italic,
-                      )),
-        ));
+                  ),
+                  SizedBox(width: 10),
+                  CircularProgressIndicator(
+                    color: primaryColor,
+                  ),
+                ],
+              )
+            : Text('Save',
+                style: GoogleFonts.lato(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: primaryColor,
+                )),
+      ));
   }
 }

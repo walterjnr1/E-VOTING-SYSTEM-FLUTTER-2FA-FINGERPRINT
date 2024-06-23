@@ -5,8 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:e_voting_2fa_biometric/core/colour/color.dart';
 import 'package:e_voting_2fa_biometric/features/settings/Presentation/widgets/settings.dart';
 import 'package:provider/provider.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class settings extends StatefulWidget {
   const settings({super.key});

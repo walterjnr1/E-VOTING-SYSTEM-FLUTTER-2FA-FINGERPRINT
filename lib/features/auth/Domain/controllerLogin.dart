@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:e_voting_2fa_biometric/features/auth/Presentation/screens/login_otp.dart';
-import 'package:e_voting_2fa_biometric/features/dashboard/Presentation/screens/dashboard_bottombar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:e_voting_2fa_biometric/core/App_constant/constant.dart';

@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:e_voting_2fa_biometric/features/auth/Domain/controller_register_OTP.dart';
 import 'package:provider/provider.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class register_otp extends StatefulWidget {
   @override
@@ -70,54 +68,46 @@ class _register_otpState extends State<register_otp> {
         width: MediaQuery.of(context).size.width,
         height: 60,
         child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              backgroundColor: AppColor, shape: const StadiumBorder()),
-          onPressed: () {
-            setState(() {
-              isLoading = true;
-            });
+        style: ElevatedButton.styleFrom(
+            backgroundColor: AppColor, shape: const StadiumBorder()),
+        onPressed: () async {
+          setState(() {
+            isLoading = true;
+          });
 
-            Future.delayed(const Duration(seconds: 5), () {
-              setState(() {
-                isLoading = true;
-                validateRegistrationOTPclass.otp(context);
-                isLoading = true;
-              });
+          try {
+            await validateRegistrationOTPclass.otp(context);
+          } finally {
+            setState(() {
+              isLoading = false;
             });
-          },
-          child: isLoading
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Loading...',
-                      style: GoogleFonts.lato(
-                          textStyle:
-                              TextStyle(color: primaryColor, letterSpacing: .5),
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          height: 3.0
-                          //fontStyle: FontStyle.italic,
-                          ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    CircularProgressIndicator(
+          }
+        },
+        child: isLoading
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Loading...',
+                    style: GoogleFonts.lato(
+                      fontSize: 19,
+                      fontWeight: FontWeight.bold,
                       color: primaryColor,
                     ),
-                  ],
-                )
-              : Text('Continue',
-                  style: GoogleFonts.lato(
-                      textStyle:
-                          TextStyle(color: primaryColor, letterSpacing: .5),
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                      height: 3.0
-                      //fontStyle: FontStyle.italic,
-                      )),
-        ));
+                  ),
+                  SizedBox(width: 10),
+                  CircularProgressIndicator(
+                    color: primaryColor,
+                  ),
+                ],
+              )
+            : Text('Continue',
+                style: GoogleFonts.lato(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: primaryColor,
+                )),
+      ));
   }
 }
 

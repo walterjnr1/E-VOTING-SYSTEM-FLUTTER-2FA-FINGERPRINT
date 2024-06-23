@@ -62,5 +62,7 @@ class VoterModel {
         "state": state,
         "occupation": occupation,
         "educational_qualification": educational_qualification,
+        "image": image,
+
       };
 }

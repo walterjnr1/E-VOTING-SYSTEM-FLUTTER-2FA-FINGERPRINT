@@ -64,10 +64,10 @@ List<DropdownMenuItem<String>> get dropdownItems_State {
   return menuItems;
 }
 
-//Select sex Statusdropdownlist
+//Select qualification dropdownlist
 String cmdqualification = "Select Qualification";
 
-List<DropdownMenuItem<String>> get dropdownItems_Qualification {
+List<DropdownMenuItem<String>> get dropdownItems_qualification {
   List<DropdownMenuItem<String>> menuItems = [
     const DropdownMenuItem(
         child: Text("Select Qualification"), value: "Select Qualification"),
@@ -83,14 +83,8 @@ List<DropdownMenuItem<String>> get dropdownItems_Qualification {
   return menuItems;
 }
 
-class registerVoter1 {
-  static Future<void> registerVoter(
-      BuildContext context, File pickedimage) async {
-    //store details
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('email_session', txtemail_F.text);
-    prefs.setString('phone_session', txtphone_F.text);
-
+class Voter {
+  static Future<void> registerVoter(BuildContext context, File pickedimage) async {
     var headers = {'Accept': 'application/json'};
     var request =
         http.MultipartRequest('POST', Uri.parse('${URL_PREFIX}/registerVoter'));
@@ -106,7 +100,6 @@ class registerVoter1 {
       'lga': txtlga_F.text,
       'state': cmdstate,
       'occupation': txtoccupation_F.text,
-      'status': '1',
       'educational_qualification': cmdqualification
     });
 
@@ -118,7 +111,14 @@ class registerVoter1 {
     String message = await response.stream.transform(utf8.decoder).join();
     print(message);
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
+
+ //store details
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('email_session', txtemail_F.text);
+    prefs.setString('phone_session', txtphone_F.text);
+
+
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => register_otp()));
     } else {
